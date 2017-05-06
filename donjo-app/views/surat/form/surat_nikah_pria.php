@@ -30,6 +30,11 @@ border-right:1px solid #eee;
 table.form.detail td{
 padding:5px;
 }
+span.judul_tengah {
+	font-weight: bold;
+	padding-left: 10px;
+	padding-right: 5px;
+}
 </style>
 <div id="pageC">
 <table class="inner">
@@ -88,18 +93,28 @@ padding:5px;
 </tr>
 <tr>
 	<th>Warganegara</th>
-	<td>
+	<td colspan="5">
     <select name="wn_ayah">
       <option value="">Pilih warganegara</option>
       <?php foreach($warganegara as $data){?>
         <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
       <?php }?>
 	  </select>
+		<span class="judul_tengah">Agama</span>
+    <select name="agama_ayah">
+      <option value="">Pilih Agama</option>
+      <?php foreach($agama as $data){?>
+        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+      <?php }?>
+    </select>
+		<span class="judul_tengah">Pekerjaan</span>
+    <select name="pekerjaan_ayah">
+      <option value="">Pilih Pekerjaan</option>
+      <?php  foreach($pekerjaan as $data){?>
+        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+      <?php }?>
+    </select>
 	</td>
-	<th>Agama</th>
-	<td><input name="agama_ayah" type="text" class="inputbox " size="15"/></td>
-	<th>Pekerjaan</th>
-	<td><input name="pekerjaan_ayah" type="text" class="inputbox " size="30"/></td>
 </tr>
 <tr>
 <th>Tempat Tinggal</th>
@@ -122,18 +137,28 @@ padding:5px;
 </tr>
 <tr>
 	<th>Warganegara</th>
-	<td>
+	<td colspan="5">
     <select name="wn_ibu">
       <option value="">Pilih warganegara</option>
       <?php foreach($warganegara as $data){?>
         <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
       <?php }?>
 	  </select>
+		<span class="judul_tengah">Agama</span>
+    <select name="agama_ibu">
+      <option value="">Pilih Agama</option>
+      <?php foreach($agama as $data){?>
+        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+      <?php }?>
+    </select>
+		<span class="judul_tengah">Pekerjaan</span>
+    <select name="pekerjaan_ibu">
+      <option value="">Pilih Pekerjaan</option>
+      <?php  foreach($pekerjaan as $data){?>
+        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+      <?php }?>
+    </select>
 	</td>
-	<th>Agama</th>
-	<td><input name="agama_ibu" type="text" class="inputbox " size="15"/></td>
-	<th>Pekerjaan</th>
-	<td><input name="pekerjaan_ibu" type="text" class="inputbox " size="30"/></td>
 </tr>
 <tr>
 <th>Tempat Tinggal</th>
@@ -168,18 +193,27 @@ padding:5px;
 </tr>
 <tr>
 	<th>Warganegara</th>
-	<td>
+	<td colspan="5">
     <select name="wn_pasangan">
       <option value="">Pilih warganegara</option>
       <?php foreach($warganegara as $data){?>
         <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
       <?php }?>
 	  </select>
-	</td>
-	<th>Agama</th>
-	<td><input name="agama_pasangan" type="text" class="inputbox required" size="15"/>
-	<th>Pekerjaan</th>
-	<td><input name="pekerjaan_pasangan" type="text" class="inputbox required" size="15"/>
+		<span class="judul_tengah">Agama</span>
+    <select name="agama_pasangan">
+      <option value="">Pilih Agama</option>
+      <?php foreach($agama as $data){?>
+        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+      <?php }?>
+    </select>
+		<span class="judul_tengah">Pekerjaan</span>
+    <select name="pekerjaan_pasangan">
+      <option value="">Pilih Pekerjaan</option>
+      <?php  foreach($pekerjaan as $data){?>
+        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+      <?php }?>
+    </select>
 	</td>
 </tr>
 <tr>
@@ -207,18 +241,28 @@ padding:5px;
 </tr>
 <tr>
 	<th>Warganegara</th>
-	<td>
+	<td colspan="5">
     <select name="wn_istri_dulu">
       <option value="">Pilih warganegara</option>
       <?php foreach($warganegara as $data){?>
         <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
       <?php }?>
 	  </select>
+		<span class="judul_tengah">Agama</span>
+    <select name="agama_istri_dulu">
+      <option value="">Pilih Agama</option>
+      <?php foreach($agama as $data){?>
+        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+      <?php }?>
+    </select>
+		<span class="judul_tengah">Pekerjaan</span>
+    <select name="pek_istri_dulu">
+      <option value="">Pilih Pekerjaan</option>
+      <?php  foreach($pekerjaan as $data){?>
+        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+      <?php }?>
+    </select>
 	</td>
-	<th>Agama</th>
-	<td><input name="agama_istri_dulu" type="text" class="inputbox " size="15"/></td>
-	<th>Pekerjaan</th>
-	<td><input name="pek_istri_dulu" type="text" class="inputbox " size="30"/></td>
 </tr>
 <tr>
 <th>Tempat Tinggal</th>

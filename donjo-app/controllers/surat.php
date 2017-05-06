@@ -174,6 +174,8 @@ class Surat extends CI_Controller{
 				break;
 			case 'surat_nikah_pria':
 				$data['warganegara'] = $this->penduduk_model->list_warganegara();
+				$data['agama'] = $this->penduduk_model->list_agama();
+				$data['pekerjaan'] = $this->penduduk_model->list_pekerjaan();
 				break;
 		}
 	}

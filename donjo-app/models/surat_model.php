@@ -381,7 +381,7 @@
 	        // Regex ini untuk membersihkan kode isian dari karakter yang dimasukkan oleh Word
 	        // Regex ini disusun berdasarkan RTF yang dihasilkan oleh Word 2011 di Mac.
 	        // Perlu diverifikasi regex ini berlaku juga untuk RTF yang dihasilkan oleh versi Word lain.
-	        $regex = "/(\}.?#)|rtlch.?#|fcs.?#+|afs.?\d#+|f\d*?\d#|fs\d*?\d#|af\d*?\d#+|ltrch#+|insrsid\d*?\d#+|charrsid\d*?\d#+|#+/";
+	        $regex = "/(\}.?#)|rtlch.?#|fcs.?#+|afs.?\d#+|f\d*?\d#|fs\d*?\d#|af\d*?\d#+|ltrch#+|insrsid\d*?\d#+|alang\d+#+|lang\d+|langfe\d+|langnp\d+|langfenp\d+|b#+|ul#+|charrsid\d*?\d#+|#+/";
 	        $kode_isian = preg_replace($regex, "", $kode_isian);
 	        $buffer_out .= $kode_isian;
 	        break;
@@ -489,7 +489,7 @@
 				$buffer=str_replace("[status_kk_pindah]",$kode['status_kk_pindah'][$input['status_kk_pindah_id']],$buffer);
 				break;
 
-			
+
 			case 'surat_nikah_pria':
 				# Data orang tua apabila warga desa
 				if ($ayah) {
@@ -523,7 +523,7 @@
 					$buffer=str_replace("[form_tempat_tinggal_istri]","RT $istri[rt] / RW $istri[rw] $istri[dusun] $alamat_desa",$buffer);
 				}
 				break;
-				
+
 			case 'surat_nikah_wanita':
 				# Data orang tua apabila warga desa
 				if ($ayah) {
@@ -557,8 +557,8 @@
 					$buffer=str_replace("[form_tempat_tinggal_calonsuami]","RT $istri[rt] / RW $istri[rw] $istri[dusun] $alamat_desa",$buffer);
 				}
 				break;
-					
-				
+
+
 			case 'surat_persetujuan_mempelai':
 				# Data suami
 				if ($input['id_suami']) {

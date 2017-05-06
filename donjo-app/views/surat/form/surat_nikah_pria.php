@@ -87,12 +87,19 @@ padding:5px;
 <input name="tanggallahir_ayah" type="text" class="inputbox  datepicker" size="20"/></td>
 </tr>
 <tr>
-<th>Warganegara</th>
-<td><input name="wn_ayah" type="text" class="inputbox " size="15"/></td>
-<th>Agama</th>
-<td><input name="agama_ayah" type="text" class="inputbox " size="15"/></td>
-<th>Pekerjaan</th>
-<td><input name="pek_ayah" type="text" class="inputbox " size="30"/></td>
+	<th>Warganegara</th>
+	<td>
+    <select name="wn_ayah">
+      <option value="">Pilih warganegara</option>
+      <?php foreach($warganegara as $data){?>
+        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+      <?php }?>
+	  </select>
+	</td>
+	<th>Agama</th>
+	<td><input name="agama_ayah" type="text" class="inputbox " size="15"/></td>
+	<th>Pekerjaan</th>
+	<td><input name="pekerjaan_ayah" type="text" class="inputbox " size="30"/></td>
 </tr>
 <tr>
 <th>Tempat Tinggal</th>
@@ -114,12 +121,19 @@ padding:5px;
 <input name="tanggallahir_ibu" type="text" class="inputbox  datepicker" size="20"/></td>
 </tr>
 <tr>
-<th>Warganegara</th>
-<td><input name="wn_ibu" type="text" class="inputbox " size="15"/></td>
-<th>Agama</th>
-<td><input name="agama_ibu" type="text" class="inputbox " size="15"/></td>
-<th>Pekerjaan</th>
-<td><input name="pek_ibu" type="text" class="inputbox " size="30"/></td>
+	<th>Warganegara</th>
+	<td>
+    <select name="wn_ibu">
+      <option value="">Pilih warganegara</option>
+      <?php foreach($warganegara as $data){?>
+        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+      <?php }?>
+	  </select>
+	</td>
+	<th>Agama</th>
+	<td><input name="agama_ibu" type="text" class="inputbox " size="15"/></td>
+	<th>Pekerjaan</th>
+	<td><input name="pekerjaan_ibu" type="text" class="inputbox " size="30"/></td>
 </tr>
 <tr>
 <th>Tempat Tinggal</th>
@@ -151,15 +165,24 @@ padding:5px;
 <th>Binti</th>
 <td><input name="ayah_pasangan" type="text" class="inputbox required" size="15"/>
 </td>
-</tr><tr>
-<th>Warganegara</th>
-<td><input name="wn_pasangan" type="text" class="inputbox required" size="15"/>
-<th>Agama</th>
-<td><input name="agama_pasangan" type="text" class="inputbox required" size="15"/>
-<th>Pekerjaan</th>
-<td><input name="pekerjaan_pasangan" type="text" class="inputbox required" size="15"/>
-</td>
-</tr><tr>
+</tr>
+<tr>
+	<th>Warganegara</th>
+	<td>
+    <select name="wn_pasangan">
+      <option value="">Pilih warganegara</option>
+      <?php foreach($warganegara as $data){?>
+        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+      <?php }?>
+	  </select>
+	</td>
+	<th>Agama</th>
+	<td><input name="agama_pasangan" type="text" class="inputbox required" size="15"/>
+	<th>Pekerjaan</th>
+	<td><input name="pekerjaan_pasangan" type="text" class="inputbox required" size="15"/>
+	</td>
+</tr>
+<tr>
 <th>Tempat Tinggal</th>
 <td>
 <input name="alamat_pasangan" type="text" class="inputbox required" size="40"/>
@@ -175,7 +198,7 @@ padding:5px;
 <table class="form">
 <tr>
 <th>Nama Istri terdahulu</th>
-<td><input name="istri_dulu" type="text" class="inputbox " size="40"/></td><th>Binti :</th><td><input name="binti" type="text" class="inputbox " size="40"/></td>
+<td><input name="pasangan_dulu" type="text" class="inputbox " size="40"/></td><th>Binti :</th><td><input name="binti" type="text" class="inputbox " size="40"/></td>
 </tr>
 <tr>
 <th>Tempat Tanggal Lahir</th>
@@ -183,12 +206,19 @@ padding:5px;
 <input name="tgllahir_istri_dulu" type="text" class="inputbox  datepicker" size="20"/></td>
 </tr>
 <tr>
-<th>Warganegara</th>
-<td><input name="wn_istri_dulu" type="text" class="inputbox " size="15"/></td>
-<th>Agama</th>
-<td><input name="agama_istri_dulu" type="text" class="inputbox " size="15"/></td>
-<th>Pekerjaan</th>
-<td><input name="pek_istri_dulu" type="text" class="inputbox " size="30"/></td>
+	<th>Warganegara</th>
+	<td>
+    <select name="wn_istri_dulu">
+      <option value="">Pilih warganegara</option>
+      <?php foreach($warganegara as $data){?>
+        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+      <?php }?>
+	  </select>
+	</td>
+	<th>Agama</th>
+	<td><input name="agama_istri_dulu" type="text" class="inputbox " size="15"/></td>
+	<th>Pekerjaan</th>
+	<td><input name="pek_istri_dulu" type="text" class="inputbox " size="30"/></td>
 </tr>
 <tr>
 <th>Tempat Tinggal</th>

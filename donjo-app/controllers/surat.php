@@ -172,6 +172,9 @@ class Surat extends CI_Controller{
 			case 'surat_pernyataan_akta':
 				$data['laki'] = $this->surat_model->list_penduduk_laki();
 				break;
+			case 'surat_nikah_pria':
+				$data['warganegara'] = $this->penduduk_model->list_warganegara();
+				break;
 		}
 	}
 

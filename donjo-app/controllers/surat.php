@@ -176,6 +176,9 @@ class Surat extends CI_Controller{
 				$data['warganegara'] = $this->penduduk_model->list_warganegara();
 				$data['agama'] = $this->penduduk_model->list_agama();
 				$data['pekerjaan'] = $this->penduduk_model->list_pekerjaan();
+				$id = $this->input->post('nik');
+				$data['ayah'] = $this->surat_model->get_data_ayah($id);
+				$data['ibu'] = $this->surat_model->get_data_ibu($id);
 				break;
 		}
 	}

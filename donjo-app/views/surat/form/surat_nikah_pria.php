@@ -41,276 +41,332 @@ span.judul_tengah {
 <tr style="vertical-align:top">
 
 <td style="background:#fff;padding:5px;">
-<div class="content-header">
-
-</div>
+<div class="content-header"></div>
 <div id="contentpane">
-<div class="ui-layout-north panel">
-<h3>Surat Keterangan Untuk Nikah Pria</h3>
-</div>
+	<div class="ui-layout-north panel">
+		<h3>Surat Keterangan Untuk Nikah Pria</h3>
+	</div>
 
-<div class="ui-layout-center" id="maincontent" style="padding: 5px;">
-<table class="form">
-<tr>
-<th>NIK / Nama</th>
-<td>
-<form action="" id="main" name="main" method="POST">
-<div id="nik" name="nik"></div>
-</form>
-</tr>
+	<div class="ui-layout-center" id="maincontent" style="padding: 5px;">
+		<table class="form">
+			<tr>
+				<th>NIK / Nama</th>
+				<td>
+					<form action="" id="main" name="main" method="POST">
+						<div id="nik" name="nik"></div>
+					</form>
+					<?php if($individu){ //bagian info setelah terpilih?>
+					  <?php include("donjo-app/views/surat/form/konfirmasi_pemohon.php"); ?>
+					<?php }?>
+				</td>
+			</tr>
 
-<form id="validasi" action="<?php echo $form_action?>" method="POST" target="_blank">
-<input type="hidden" name="nik" value="<?php echo $individu['id']?>">
-<?php if($individu){ //bagian info setelah terpilih?>
-  <?php include("donjo-app/views/surat/form/konfirmasi_pemohon.php"); ?>
-<?php }?>
-<tr>
-<th>Jika pria, terangkan jejaka, duda atau beristri dan berapa istrinya</th>
-<td>
-<input name="jaka" type="text" class="inputbox " size="40"/>
-</td>
-</tr>
-<tr>
-<th>Nomor Surat</th>
-<td>
-<input name="nomor" type="text" class="inputbox required" size="12"/> <span>Terakhir: <?php echo $surat_terakhir['no_surat'];?> (tgl: <?php echo $surat_terakhir['tanggal']?>)</span>
-</td>
-</tr>
-<tr>
-</div>
-<div id="contentpane">
-<div class="ui-layout-north panel">
-<th>DATA AYAH (Isi jika ayah bukan warga <?php echo strtolower(config_item('sebutan_desa'))?> ini)</th>
-<table class="form">
-<tr>
-<th>Nama</th>
-<td><input name="nama_ayah" type="text" class="inputbox " size="30"/></td>
-</tr>
-<tr>
-<th>Tempat Tanggal Lahir</th>
-<td><input name="tempatlahir_ayah" type="text" class="inputbox " size="30"/>
-<input name="tanggallahir_ayah" type="text" class="inputbox  datepicker" size="20"/></td>
-</tr>
-<tr>
-	<th>Warganegara</th>
-	<td colspan="5">
-    <select name="wn_ayah">
-      <option value="">Pilih warganegara</option>
-      <?php foreach($warganegara as $data){?>
-        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
-      <?php }?>
-	  </select>
-		<span class="judul_tengah">Agama</span>
-    <select name="agama_ayah">
-      <option value="">Pilih Agama</option>
-      <?php foreach($agama as $data){?>
-        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
-      <?php }?>
-    </select>
-		<span class="judul_tengah">Pekerjaan</span>
-    <select name="pekerjaan_ayah">
-      <option value="">Pilih Pekerjaan</option>
-      <?php  foreach($pekerjaan as $data){?>
-        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
-      <?php }?>
-    </select>
-	</td>
-</tr>
-<tr>
-<th>Tempat Tinggal</th>
-<td><input name="alamat_ayah" type="text" class="inputbox " size="80"/></td>
-</div>
-</tr>
-<tr>
-</div>
-<th>DATA IBU (Isi jika ibu bukan warga <?php echo strtolower(config_item('sebutan_desa'))?> ini)</th>
-</tr>
-<tr>
-<tr>
-<th>Nama</th>
-<td><input name="nama_ibu" type="text" class="inputbox " size="30"/></td>
-</tr>
-<tr>
-<th>Tempat Tanggal Lahir</th>
-<td><input name="tempatlahir_ibu" type="text" class="inputbox " size="30"/>
-<input name="tanggallahir_ibu" type="text" class="inputbox  datepicker" size="20"/></td>
-</tr>
-<tr>
-	<th>Warganegara</th>
-	<td colspan="5">
-    <select name="wn_ibu">
-      <option value="">Pilih warganegara</option>
-      <?php foreach($warganegara as $data){?>
-        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
-      <?php }?>
-	  </select>
-		<span class="judul_tengah">Agama</span>
-    <select name="agama_ibu">
-      <option value="">Pilih Agama</option>
-      <?php foreach($agama as $data){?>
-        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
-      <?php }?>
-    </select>
-		<span class="judul_tengah">Pekerjaan</span>
-    <select name="pekerjaan_ibu">
-      <option value="">Pilih Pekerjaan</option>
-      <?php  foreach($pekerjaan as $data){?>
-        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
-      <?php }?>
-    </select>
-	</td>
-</tr>
-<tr>
-<th>Tempat Tinggal</th>
-<td><input name="alamat_ibu" type="text" class="inputbox " size="80"/></td>
-</tr>
-<tr>
-<div id="contentpane">
-<div class="ui-layout-north panel">
-<th>DATA CALON PASANGAN</th>
-<td></td>
-</tr>
-<tr>
-</div>
-<div class="ui-layout-center" id="maincontent" style="padding: 15px;">
-<table class="form">
-<tr>
-<th>Nama Lengkap</th>
-<td>
-<input name="nama_pasangan" type="text" class="inputbox required" size="30"/>
-</td>
-</tr>
-<tr>
-<th>Tempat Tanggal Lahir</th>
-<td>
-<input name="tempatlahir_pasangan" type="text" class="inputbox required" size="30"/>
-<input name="tanggallahir_pasangan" type="text" class="inputbox required datepicker" size="20"/>
-</td>
-</tr><tr>
-<th>Binti</th>
-<td><input name="ayah_pasangan" type="text" class="inputbox required" size="15"/>
-</td>
-</tr>
-<tr>
-	<th>Warganegara</th>
-	<td colspan="5">
-    <select name="wn_pasangan">
-      <option value="">Pilih warganegara</option>
-      <?php foreach($warganegara as $data){?>
-        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
-      <?php }?>
-	  </select>
-		<span class="judul_tengah">Agama</span>
-    <select name="agama_pasangan">
-      <option value="">Pilih Agama</option>
-      <?php foreach($agama as $data){?>
-        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
-      <?php }?>
-    </select>
-		<span class="judul_tengah">Pekerjaan</span>
-    <select name="pekerjaan_pasangan">
-      <option value="">Pilih Pekerjaan</option>
-      <?php  foreach($pekerjaan as $data){?>
-        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
-      <?php }?>
-    </select>
-	</td>
-</tr>
-<tr>
-<th>Tempat Tinggal</th>
-<td>
-<input name="alamat_pasangan" type="text" class="inputbox required" size="40"/>
-</td>
-</tr>
-<tr>
-<th>DATA PASANGAN TERDAHULU </th>
-<td></td>
-</tr>
-<tr>
-</div>
-<div class="ui-layout-center" id="maincontent" style="padding: 10px;">
-<table class="form">
-<tr>
-<th>Nama Istri terdahulu</th>
-<td><input name="pasangan_dulu" type="text" class="inputbox " size="40"/></td><th>Binti :</th><td><input name="binti" type="text" class="inputbox " size="40"/></td>
-</tr>
-<tr>
-<th>Tempat Tanggal Lahir</th>
-<td><input name="tmptlahir_istri_dulu" type="text" class="inputbox " size="30"/>
-<input name="tgllahir_istri_dulu" type="text" class="inputbox  datepicker" size="20"/></td>
-</tr>
-<tr>
-	<th>Warganegara</th>
-	<td colspan="5">
-    <select name="wn_istri_dulu">
-      <option value="">Pilih warganegara</option>
-      <?php foreach($warganegara as $data){?>
-        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
-      <?php }?>
-	  </select>
-		<span class="judul_tengah">Agama</span>
-    <select name="agama_istri_dulu">
-      <option value="">Pilih Agama</option>
-      <?php foreach($agama as $data){?>
-        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
-      <?php }?>
-    </select>
-		<span class="judul_tengah">Pekerjaan</span>
-    <select name="pek_istri_dulu">
-      <option value="">Pilih Pekerjaan</option>
-      <?php  foreach($pekerjaan as $data){?>
-        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
-      <?php }?>
-    </select>
-	</td>
-</tr>
-<tr>
-<th>Tempat Tinggal</th>
-<td><input name="alamat_istri_dulu" type="text" class="inputbox " size="80"/></td>
-</tr>
-<tr>
-<th>Keterangan Istri Dulu</th>
-<td><input name="ket_istri_dulu" type="text" class="inputbox " size="80"/></td>
-</tr>
-<tr>
+			<form id="validasi" action="<?php echo $form_action?>" method="POST" target="_blank">
+				<input type="hidden" name="nik" value="<?php echo $individu['id']?>">
+				<tr>
+					<th>Jika pria, terangkan jejaka, duda atau beristri dan berapa istrinya</th>
+					<td>
+						<input name="jaka" type="text" class="inputbox " size="40"/>
+					</td>
+				</tr>
+				<tr>
+					<th>Nomor Surat</th>
+					<td>
+						<input name="nomor" type="text" class="inputbox required" size="12"/> <span>Terakhir: <?php echo $surat_terakhir['no_surat'];?> (tgl: <?php echo $surat_terakhir['tanggal']?>)</span>
+					</td>
+				</tr>
+				<?php if ($ayah) : ?>
+					<tr>
+						<th colspan="2">DATA AYAH</th>
+					</tr>
+					<tr>
+						<th>Nama</th>
+						<td><?php echo $ayah['nama']?></td>
+					</tr>
+					<tr>
+						<th>Tempat Tanggal Lahir</th>
+						<td>
+							<?php echo $ayah['tempatlahir']." / ".tgl_indo_out($ayah['tanggallahir'])?>
+						</td>
+					</tr>
+					<tr>
+						<th>Warganegara</th>
+						<td>
+							<?php echo $ayah['wn']?>
+							<span class="judul_tengah">Agama : </span>
+							<?php echo $ayah['agama']?>
+							<span class="judul_tengah">Pekerjaan : </span>
+							<?php echo $ayah['pek']?>
+						</td>
+					</tr>
+					<tr>
+						<th>Tempat Tinggal</th>
+						<td><?php echo $ayah['alamat_wilayah']?></td>
+					</tr>
+				<?php else: ?>
+					<tr>
+						<th colspan="2">DATA AYAH (Isi jika ayah bukan warga <?php echo strtolower(config_item('sebutan_desa'))?> ini)</th>
+					</tr>
+					<tr>
+						<th>Nama</th>
+						<td><input name="nama_ayah" type="text" class="inputbox " size="30"/></td>
+					</tr>
+					<tr>
+						<th>Tempat Tanggal Lahir</th>
+						<td>
+							<input name="tempatlahir_ayah" type="text" class="inputbox " size="30"/>
+							<input name="tanggallahir_ayah" type="text" class="inputbox  datepicker" size="20"/>
+						</td>
+					</tr>
+					<tr>
+						<th>Warganegara</th>
+						<td colspan="5">
+					    <select name="wn_ayah">
+					      <option value="">Pilih warganegara</option>
+					      <?php foreach($warganegara as $data){?>
+					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					      <?php }?>
+						  </select>
+							<span class="judul_tengah">Agama</span>
+					    <select name="agama_ayah">
+					      <option value="">Pilih Agama</option>
+					      <?php foreach($agama as $data){?>
+					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					      <?php }?>
+					    </select>
+							<span class="judul_tengah">Pekerjaan</span>
+					    <select name="pekerjaan_ayah">
+					      <option value="">Pilih Pekerjaan</option>
+					      <?php  foreach($pekerjaan as $data){?>
+					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					      <?php }?>
+					    </select>
+						</td>
+					</tr>
+					<tr>
+						<th>Tempat Tinggal</th>
+						<td><input name="alamat_ayah" type="text" class="inputbox " size="80"/></td>
+					</tr>
+				<?php endif; ?>
 
-<th>Staf Pemerintah <?php echo ucwords(config_item('sebutan_desa'))?></th>
-<td>
-<select name="pamong"  class="inputbox required" >
-<option value="">Pilih Staf Pemerintah <?php echo ucwords(config_item('sebutan_desa'))?></option>
-<?php foreach($pamong AS $data){?>
-<option value="<?php echo $data['pamong_nama']?>"><font style="bold"><?php echo unpenetration($data['pamong_nama'])?></font> (<?php echo unpenetration($data['jabatan'])?>)</option>
-<?php }?>
-</select>
-</td>
-</tr>
-<tr>
-<th>Sebagai</th>
-<td>
-<select name="jabatan"  class="inputbox required">
-<option value="">Pilih Jabatan</option>
-<?php foreach($pamong AS $data){?>
-<option ><?php echo unpenetration($data['jabatan'])?></option>
-<?php }?>
-</select>
-</td>
-</tr>
-</table>
-</div>
+				<?php if ($ibu) : ?>
+					<tr>
+						<th colspan="2">DATA IBU</th>
+					</tr>
+					<tr>
+						<th>Nama</th>
+						<td><?php echo $ibu['nama']?></td>
+					</tr>
+					<tr>
+						<th>Tempat Tanggal Lahir</th>
+						<td>
+							<?php echo $ibu['tempatlahir']." / ".tgl_indo_out($ibu['tanggallahir'])?>
+						</td>
+					</tr>
+					<tr>
+						<th>Warganegara</th>
+						<td>
+							<?php echo $ibu['wn']?>
+							<span class="judul_tengah">Agama : </span>
+							<?php echo $ibu['agama']?>
+							<span class="judul_tengah">Pekerjaan : </span>
+							<?php echo $ibu['pek']?>
+						</td>
+					</tr>
+					<tr>
+						<th>Tempat Tinggal</th>
+						<td><?php echo $ibu['alamat_wilayah']?></td>
+					</tr>
+				<?php else: ?>
+					<tr>
+						<th colspan="2">DATA IBU (Isi jika ibu bukan warga <?php echo strtolower(config_item('sebutan_desa'))?> ini)</th>
+					</tr>
+					<tr>
+						<th>Nama</th>
+						<td><input name="nama_ibu" type="text" class="inputbox " size="30"/></td>
+					</tr>
+					<tr>
+						<th>Tempat Tanggal Lahir</th>
+						<td>
+							<input name="tempatlahir_ibu" type="text" class="inputbox " size="30"/>
+							<input name="tanggallahir_ibu" type="text" class="inputbox  datepicker" size="20"/>
+						</td>
+					</tr>
+					<tr>
+						<th>Warganegara</th>
+						<td colspan="5">
+					    <select name="wn_ibu">
+					      <option value="">Pilih warganegara</option>
+					      <?php foreach($warganegara as $data){?>
+					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					      <?php }?>
+						  </select>
+							<span class="judul_tengah">Agama</span>
+					    <select name="agama_ibu">
+					      <option value="">Pilih Agama</option>
+					      <?php foreach($agama as $data){?>
+					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					      <?php }?>
+					    </select>
+							<span class="judul_tengah">Pekerjaan</span>
+					    <select name="pekerjaan_ibu">
+					      <option value="">Pilih Pekerjaan</option>
+					      <?php  foreach($pekerjaan as $data){?>
+					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					      <?php }?>
+					    </select>
+						</td>
+					</tr>
+					<tr>
+						<th>Tempat Tinggal</th>
+						<td><input name="alamat_ibu" type="text" class="inputbox " size="80"/></td>
+					</tr>
+				<?php endif; ?>
 
-<div class="ui-layout-south panel bottom">
-<div class="left">
-<a href="<?php echo site_url()?>surat" class="uibutton icon prev">Kembali</a>
-</div>
-<div class="right">
-<div class="uibutton-group">
-<button class="uibutton" type="reset">Clear</button>
+				<tr>
+					<th colspan="2">DATA CALON PASANGAN</th>
+				</tr>
+				<tr>
+				<tr>
+					<th>Nama Lengkap</th>
+					<td>
+						<input name="nama_pasangan" type="text" class="inputbox required" size="30"/>
+					</td>
+				</tr>
+				<tr>
+					<th>Tempat Tanggal Lahir</th>
+					<td>
+						<input name="tempatlahir_pasangan" type="text" class="inputbox required" size="30"/>
+						<input name="tanggallahir_pasangan" type="text" class="inputbox required datepicker" size="20"/>
+					</td>
+				</tr>
+				<tr>
+					<th>Binti</th>
+					<td><input name="ayah_pasangan" type="text" class="inputbox required" size="15"/></td>
+				</tr>
+				<tr>
+					<th>Warganegara</th>
+					<td colspan="5">
+				    <select name="wn_pasangan">
+				      <option value="">Pilih warganegara</option>
+				      <?php foreach($warganegara as $data){?>
+				        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+				      <?php }?>
+					  </select>
+						<span class="judul_tengah">Agama</span>
+				    <select name="agama_pasangan">
+				      <option value="">Pilih Agama</option>
+				      <?php foreach($agama as $data){?>
+				        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+				      <?php }?>
+				    </select>
+						<span class="judul_tengah">Pekerjaan</span>
+				    <select name="pekerjaan_pasangan">
+				      <option value="">Pilih Pekerjaan</option>
+				      <?php  foreach($pekerjaan as $data){?>
+				        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+				      <?php }?>
+				    </select>
+					</td>
+				</tr>
+				<tr>
+					<th>Tempat Tinggal</th>
+					<td>
+						<input name="alamat_pasangan" type="text" class="inputbox required" size="40"/>
+					</td>
+				</tr>
+				<tr>
+					<th colspan="2">DATA PASANGAN TERDAHULU </th>
+				</tr>
+				<tr>
+					<th>Nama Istri terdahulu</th>
+					<td>
+						<input name="pasangan_dulu" type="text" class="inputbox " size="40"/>
+						<span class="judul_tengah">Binti :</span>
+						<input name="binti" type="text" class="inputbox " size="40"/>
+					</td>
+				</tr>
+				<tr>
+					<th>Tempat Tanggal Lahir</th>
+					<td>
+						<input name="tmptlahir_istri_dulu" type="text" class="inputbox " size="30"/>
+						<input name="tgllahir_istri_dulu" type="text" class="inputbox  datepicker" size="20"/>
+					</td>
+				</tr>
+				<tr>
+					<th>Warganegara</th>
+					<td colspan="5">
+				    <select name="wn_istri_dulu">
+				      <option value="">Pilih warganegara</option>
+				      <?php foreach($warganegara as $data){?>
+				        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+				      <?php }?>
+					  </select>
+						<span class="judul_tengah">Agama</span>
+				    <select name="agama_istri_dulu">
+				      <option value="">Pilih Agama</option>
+				      <?php foreach($agama as $data){?>
+				        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+				      <?php }?>
+				    </select>
+						<span class="judul_tengah">Pekerjaan</span>
+				    <select name="pek_istri_dulu">
+				      <option value="">Pilih Pekerjaan</option>
+				      <?php  foreach($pekerjaan as $data){?>
+				        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+				      <?php }?>
+				    </select>
+					</td>
+				</tr>
+				<tr>
+					<th>Tempat Tinggal</th>
+					<td><input name="alamat_istri_dulu" type="text" class="inputbox " size="80"/></td>
+				</tr>
+				<tr>
+					<th>Keterangan Istri Dulu</th>
+					<td><input name="ket_istri_dulu" type="text" class="inputbox " size="80"/></td>
+				</tr>
+				<tr>
+					<th>Staf Pemerintah <?php echo ucwords(config_item('sebutan_desa'))?></th>
+					<td>
+						<select name="pamong"  class="inputbox required" >
+							<option value="">Pilih Staf Pemerintah <?php echo ucwords(config_item('sebutan_desa'))?></option>
+							<?php foreach($pamong AS $data){?>
+								<option value="<?php echo $data['pamong_nama']?>"><font style="bold"><?php echo unpenetration($data['pamong_nama'])?></font> (<?php echo unpenetration($data['jabatan'])?>)</option>
+							<?php }?>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>Sebagai</th>
+					<td>
+						<select name="jabatan"  class="inputbox required">
+							<option value="">Pilih Jabatan</option>
+							<?php foreach($pamong AS $data){?>
+								<option ><?php echo unpenetration($data['jabatan'])?></option>
+							<?php }?>
+						</select>
+					</td>
+				</tr>
+			</form>
+		</table>
+	</div>
 
-							<button type="button" onclick="$('#'+'validasi').attr('action','<?php echo $form_action?>');$('#'+'validasi').submit();" class="uibutton special"><span class="ui-icon ui-icon-print">&nbsp;</span>Cetak</button>
-							<?php if (SuratExport($url)) { ?><button type="button" onclick="$('#'+'validasi').attr('action','<?php echo $form_action2?>');$('#'+'validasi').submit();" class="uibutton confirm"><span class="ui-icon ui-icon-document">&nbsp;</span>Export Doc</button><?php } ?>
+	<div class="ui-layout-south panel bottom">
+		<div class="left">
+			<a href="<?php echo site_url()?>surat" class="uibutton icon prev">Kembali</a>
+		</div>
+	<div class="right">
+		<div class="uibutton-group">
+			<button class="uibutton" type="reset">Clear</button>
+			<button type="button" onclick="$('#'+'validasi').attr('action','<?php echo $form_action?>');$('#'+'validasi').submit();" class="uibutton special"><span class="ui-icon ui-icon-print">&nbsp;</span>Cetak</button>
+			<?php if (SuratExport($url)) { ?>
+				<button type="button" onclick="$('#'+'validasi').attr('action','<?php echo $form_action2?>');$('#'+'validasi').submit();" class="uibutton confirm"><span class="ui-icon ui-icon-document">&nbsp;</span>Export Doc</button>
+			<?php } ?>
+		</div>
+	</div>
+
 </div>
-</div>
-</div> </form>
 </div>
 </td></tr></table>
 </div>

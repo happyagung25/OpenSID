@@ -63,12 +63,16 @@ span.judul_tengah {
 
 			<form id="validasi" action="<?php echo $form_action?>" method="POST" target="_blank">
 				<input type="hidden" name="nik" value="<?php echo $individu['id']?>">
-				<tr>
-					<th>Jika pria, terangkan jejaka, duda atau beristri dan berapa istrinya</th>
-					<td>
-						<input name="jaka" type="text" class="inputbox " size="40"/>
-					</td>
-				</tr>
+				<?php if($individu) : ?>
+					<?php if($individu['sex_id']==1) : ?>
+						<tr>
+							<th>Jika pria, terangkan jejaka, duda atau beristri dan berapa istrinya</th>
+							<td>
+								<input name="jaka" type="text" class="inputbox " size="40"/>
+							</td>
+						</tr>
+					<?php endif; ?>
+				<?php endif; ?>
 				<tr>
 					<th>Nomor Surat</th>
 					<td>
@@ -279,7 +283,7 @@ span.judul_tengah {
 					<th colspan="2">DATA PASANGAN TERDAHULU </th>
 				</tr>
 				<tr>
-					<th>Nama Istri terdahulu</th>
+					<th>Nama <?php echo ucwords($jenis_pasangan)?> Terdahulu</th>
 					<td>
 						<input name="pasangan_dulu" type="text" class="inputbox " size="40"/>
 						<span class="judul_tengah">Binti :</span>
@@ -323,7 +327,7 @@ span.judul_tengah {
 					<td><input name="alamat_istri_dulu" type="text" class="inputbox " size="80"/></td>
 				</tr>
 				<tr>
-					<th>Keterangan Istri Dulu</th>
+					<th>Keterangan <?php echo ucwords($jenis_pasangan)?> Dulu</th>
 					<td><input name="ket_istri_dulu" type="text" class="inputbox " size="80"/></td>
 				</tr>
 				<tr>

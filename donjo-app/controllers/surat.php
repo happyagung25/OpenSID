@@ -48,13 +48,12 @@ class Surat extends CI_Controller{
 			unset($_SESSION['id_suami']);
 			unset($_SESSION['id_istri']);
 		}
-
 		$data['url']=$url;
-		if(isset($_POST['nik'])){
+		if(!empty($_POST['nik'])){
 			$data['individu']=$this->surat_model->get_penduduk($_POST['nik']);
 			$data['anggota']=$this->surat_model->list_anggota($data['individu']['id_kk'],$data['individu']['nik']);
 		}else{
-			$data['individu']=NULL;
+			unset($data['individu']);
 			$data['anggota']=NULL;
 		}
 		$this->get_data_untuk_form($url,$data);
@@ -173,9 +172,15 @@ class Surat extends CI_Controller{
 				$data['laki'] = $this->surat_model->list_penduduk_laki();
 				break;
 			case 'surat_nikah_pria':
+				$status_kawin_pria = array(
+					"BELUM KAWIN" => "Jejaka",
+					"KAWIN" => "Beristri",
+					"CERAI HIDUP" => "Duda",
+					"CERAI MATI" => "Duda");
 				$data['warganegara'] = $this->penduduk_model->list_warganegara();
 				$data['agama'] = $this->penduduk_model->list_agama();
 				$data['pekerjaan'] = $this->penduduk_model->list_pekerjaan();
+				$data['nomor'] = $this->input->post('nomor_main');
 				if (!empty($this->input->post('nik'))) {
 					$id = $this->input->post('nik');
 					$data['ayah'] = $this->surat_model->get_data_ayah($id);
@@ -184,6 +189,7 @@ class Surat extends CI_Controller{
 				if ($data['individu']) {
 					if ($data['individu']['sex_id']==1) {
 						$data['jenis_pasangan'] = "istri";
+						$data['individu']['status_kawin_pria'] = $status_kawin_pria[$data['individu']['status_kawin']];
 					} else {
 						$data['jenis_pasangan'] = "suami";
 					}

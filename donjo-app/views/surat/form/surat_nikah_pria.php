@@ -1,4 +1,19 @@
 <script>
+	function calon_pria(asal){
+		if(asal == 1){
+			$('#pria_desa').show();
+			$('#pria_luar_desa').hide();
+		} else {
+			$('#pria_desa').hide();
+			$('#pria_luar_desa').show();
+			$('#'+'main').submit();
+		}
+	}
+	function nomor_surat(nomor){
+		$('#nomor').val(nomor);
+		$('#nomor_main').val(nomor);
+	}
+
 $(function(){
 var nik = {};
 nik.results = [
@@ -35,6 +50,9 @@ span.judul_tengah {
 	padding-left: 10px;
 	padding-right: 5px;
 }
+.grey {
+	background-color: lightgrey;
+}
 </style>
 <div id="pageC">
 <table class="inner">
@@ -50,35 +68,123 @@ span.judul_tengah {
 	<div class="ui-layout-center" id="maincontent" style="padding: 5px;">
 		<table class="form">
 			<tr>
+				<th>Nomor Surat</th>
+				<td>
+					<input type="text" class="inputbox required" size="12" value="<?php echo $nomor; ?>" onchange="nomor_surat(this.value);"/> <span>Terakhir: <?php echo $surat_terakhir['no_surat'];?> (tgl: <?php echo $surat_terakhir['tanggal']?>)</span>
+				</td>
+			</tr>
+			<tr>
+				<th class="grey">CALON PASANGAN PRIA</th>
+			  <td class="grey">
+			    <div class="uiradio">
+			      <input type="radio" id="calon_pria_1" name="calon_pria" value="1" <?php if(!empty($individu)){echo 'checked';}?> onchange="calon_pria(this.value);">
+			      <label for="calon_pria_1">Warga Desa</label>
+			      <input type="radio" id="calon_pria_2" name="calon_pria" value="2" <?php if(empty($individu)){echo 'checked';}?> onchange="calon_pria(this.value);">
+			      <label for="calon_pria_2">Warga Luar Desa</label>
+			    </div>
+			  </td>
+			</tr>
+			<tr id="pria_desa" <?php if (empty($individu)) echo 'style="display: none;"'; ?>>
 				<th>NIK / Nama</th>
 				<td>
 					<form action="" id="main" name="main" method="POST">
+						<input id="nomor_main" name="nomor_main" type="hidden" value="<?php echo $nomor; ?>"/>
 						<div id="nik" name="nik"></div>
 					</form>
 					<?php if($individu){ //bagian info setelah terpilih?>
-					  <?php include("donjo-app/views/surat/form/konfirmasi_pemohon.php"); ?>
+						  <?php include("donjo-app/views/surat/form/konfirmasi_pemohon.php"); ?>
 					<?php }?>
 				</td>
 			</tr>
 
 			<form id="validasi" action="<?php echo $form_action?>" method="POST" target="_blank">
+				<input id="nomor" name="nomor" type="hidden" value=""/>
 				<input type="hidden" name="nik" value="<?php echo $individu['id']?>">
+
+				<?php if (empty($individu)) : ?>
+					<tr id="pria_luar_desa">
+						<th colspan="2">DATA CALON PASANGAN PRIA LUAR DESA</th>
+					</tr>
+					<tr>
+					<tr>
+						<th>Nama Lengkap</th>
+						<td>
+							<input name="nama_pasangan_pria" type="text" class="inputbox required" size="30"/>
+						</td>
+					</tr>
+					<tr>
+						<th>Tempat Tanggal Lahir</th>
+						<td>
+							<input name="tempatlahir_pasangan_pria" type="text" class="inputbox required" size="30"/>
+							<input name="tanggallahir_pasangan_pria" type="text" class="inputbox required datepicker" size="20"/>
+						</td>
+					</tr>
+					<tr>
+						<th>Warganegara</th>
+						<td colspan="5">
+					    <select name="wn_pasangan_pria">
+					      <option value="">Pilih warganegara</option>
+					      <?php foreach($warganegara as $data){?>
+					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					      <?php }?>
+						  </select>
+							<span class="judul_tengah">Agama</span>
+					    <select name="agama_pasangan_pria">
+					      <option value="">Pilih Agama</option>
+					      <?php foreach($agama as $data){?>
+					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					      <?php }?>
+					    </select>
+							<span class="judul_tengah">Pekerjaan</span>
+					    <select name="pekerjaan_pasangan_pria">
+					      <option value="">Pilih Pekerjaan</option>
+					      <?php  foreach($pekerjaan as $data){?>
+					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					      <?php }?>
+					    </select>
+						</td>
+					</tr>
+					<tr>
+						<th>Tempat Tinggal</th>
+						<td>
+							<input name="alamat_pasangan_pria" type="text" class="inputbox required" size="40"/>
+						</td>
+					</tr>
+					<tr>
+						<th>Jika pria, terangkan jejaka, duda atau beristri</th>
+						<td>
+							<input name="status_kawin_pria" type="text" class="inputbox " size="40"/>
+						</td>
+					</tr>
+					<tr>
+						<th>Jika beristri, berapa istrinya</th>
+						<td>
+							<input name="jumlah_istri" type="text" class="inputbox " size="10" value=""/>
+						</td>
+					</tr>
+				<?php endif; ?>
+
 				<?php if($individu) : ?>
 					<?php if($individu['sex_id']==1) : ?>
 						<tr>
-							<th>Jika pria, terangkan jejaka, duda atau beristri dan berapa istrinya</th>
+							<th>Jika pria, terangkan jejaka, duda atau beristri</th>
 							<td>
-								<input name="jaka" type="text" class="inputbox " size="40"/>
+								<input name="status_kawin_pria" type="text" class="inputbox " size="40" value="<?php echo $individu['status_kawin_pria']?>"/>
+								<span>(Status kawin: <?php echo $individu['status_kawin']?>)</span>
 							</td>
 						</tr>
+						<?php if($individu['status_kawin']=="KAWIN") : ?>
+							<tr>
+								<th>Jika beristri, berapa istrinya</th>
+								<td>
+									<input name="jumlah_istri" type="text" class="inputbox " size="10" value="1"/>
+								</td>
+							</tr>
+						<?php else:?>
+							<input name="jumlah_istri" type="hidden" value=""/>
+						<?php endif; ?>
 					<?php endif; ?>
 				<?php endif; ?>
-				<tr>
-					<th>Nomor Surat</th>
-					<td>
-						<input name="nomor" type="text" class="inputbox required" size="12"/> <span>Terakhir: <?php echo $surat_terakhir['no_surat'];?> (tgl: <?php echo $surat_terakhir['tanggal']?>)</span>
-					</td>
-				</tr>
 				<?php if ($ayah) : ?>
 					<tr>
 						<th colspan="2">DATA AYAH</th>

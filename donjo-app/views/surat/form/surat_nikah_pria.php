@@ -1,5 +1,6 @@
 <script>
 	function calon_pria(asal){
+		$('#calon_pria').val(asal);
 		if(asal == 1){
 			$('#pria_desa').show();
 			$('#pria_luar_desa').hide();
@@ -15,16 +16,16 @@
 	}
 
 $(function(){
-var nik = {};
-nik.results = [
-<?php foreach($penduduk as $data){?>
+var pria = {};
+pria.results = [
+<?php foreach($laki as $data){?>
 {id:'<?php echo $data['id']?>',name:"<?php echo $data['nik']." - ".($data['nama'])?>",info:"<?php echo ($data['alamat'])?>"},
 <?php }?>
 ];
 
-$('#nik').flexbox(nik, {
+$('#id_pria').flexbox(pria, {
 resultTemplate: '<div><label>No nik : </label>{name}</div><div>{info}</div>',
-watermark: <?php if($individu){?>'<?php echo $individu['nik']?> - <?php echo spaceunpenetration($individu['nama'])?>'<?php }else{?>'Ketik no nik di sini..'<?php }?>,
+watermark: <?php if($pria){?>'<?php echo $pria['nik']?> - <?php echo spaceunpenetration($pria['nama'])?>'<?php }else{?>'Ketik no nik di sini..'<?php }?>,
 width: 260,
 noResultsText :'Tidak ada no nik yang sesuai..',
 onSelect: function() {
@@ -77,31 +78,33 @@ span.judul_tengah {
 				<th class="grey">CALON PASANGAN PRIA</th>
 			  <td class="grey">
 			    <div class="uiradio">
-			      <input type="radio" id="calon_pria_1" name="calon_pria" value="1" <?php if(!empty($individu)){echo 'checked';}?> onchange="calon_pria(this.value);">
+			      <input type="radio" id="calon_pria_1" name="calon_pria" value="1" <?php if(!empty($pria)){echo 'checked';}?> onchange="calon_pria(this.value);">
 			      <label for="calon_pria_1">Warga Desa</label>
-			      <input type="radio" id="calon_pria_2" name="calon_pria" value="2" <?php if(empty($individu)){echo 'checked';}?> onchange="calon_pria(this.value);">
+			      <input type="radio" id="calon_pria_2" name="calon_pria" value="2" <?php if(empty($pria)){echo 'checked';}?> onchange="calon_pria(this.value);">
 			      <label for="calon_pria_2">Warga Luar Desa</label>
 			    </div>
 			  </td>
 			</tr>
-			<tr id="pria_desa" <?php if (empty($individu)) echo 'style="display: none;"'; ?>>
+			<tr id="pria_desa" <?php if (empty($pria)) echo 'style="display: none;"'; ?>>
 				<th>NIK / Nama</th>
 				<td>
 					<form action="" id="main" name="main" method="POST">
 						<input id="nomor_main" name="nomor_main" type="hidden" value="<?php echo $nomor; ?>"/>
-						<div id="nik" name="nik"></div>
+						<input id="calon_pria" name="calon_pria" type="hidden" value=""/>
+						<div id="id_pria" name="id_pria"></div>
 					</form>
-					<?php if($individu){ //bagian info setelah terpilih?>
-						  <?php include("donjo-app/views/surat/form/konfirmasi_pemohon.php"); ?>
-					<?php }?>
+					<?php if($pria){ //bagian info setelah terpilih
+							$individu = $pria;
+						  include("donjo-app/views/surat/form/konfirmasi_pemohon.php");
+					}?>
 				</td>
 			</tr>
 
 			<form id="validasi" action="<?php echo $form_action?>" method="POST" target="_blank">
 				<input id="nomor" name="nomor" type="hidden" value=""/>
-				<input type="hidden" name="nik" value="<?php echo $individu['id']?>">
+				<input type="hidden" name="nik" value="<?php echo $pria['id']?>">
 
-				<?php if (empty($individu)) : ?>
+				<?php if (empty($pria)) : ?>
 					<tr id="pria_luar_desa">
 						<th colspan="2">DATA CALON PASANGAN PRIA LUAR DESA</th>
 					</tr>
@@ -164,16 +167,16 @@ span.judul_tengah {
 					</tr>
 				<?php endif; ?>
 
-				<?php if($individu) : ?>
-					<?php if($individu['sex_id']==1) : ?>
+				<?php if($pria) : ?>
+					<?php if($pria['sex_id']==1) : ?>
 						<tr>
 							<th>Jika pria, terangkan jejaka, duda atau beristri</th>
 							<td>
-								<input name="status_kawin_pria" type="text" class="inputbox " size="40" value="<?php echo $individu['status_kawin_pria']?>"/>
-								<span>(Status kawin: <?php echo $individu['status_kawin']?>)</span>
+								<input name="status_kawin_pria" type="text" class="inputbox " size="40" value="<?php echo $pria['status_kawin_pria']?>"/>
+								<span>(Status kawin: <?php echo $pria['status_kawin']?>)</span>
 							</td>
 						</tr>
-						<?php if($individu['status_kawin']=="KAWIN") : ?>
+						<?php if($pria['status_kawin']=="KAWIN") : ?>
 							<tr>
 								<th>Jika beristri, berapa istrinya</th>
 								<td>

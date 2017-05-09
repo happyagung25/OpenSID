@@ -21,6 +21,9 @@ class Surat extends CI_Controller{
 		$data['menu_surat2'] = $this->surat_model->list_surat2();
 		$data['surat_favorit'] = $this->surat_model->list_surat_fav();
 
+		// Reset untuk surat yang menggunakan session variable
+		unset($_SESSION['id_pria']);
+
 		$header['modul_ini'] = $this->modul_ini;
 		$this->load->view('header', $header);
 		$nav['act']= 1;
@@ -42,7 +45,6 @@ class Surat extends CI_Controller{
 	}
 
 	function form($url='',$clear=''){
-
 		// Ada surat yang memakai SESSION
 		if ($clear != '') {
 			unset($_SESSION['id_suami']);
@@ -53,7 +55,7 @@ class Surat extends CI_Controller{
 			$data['individu']=$this->surat_model->get_penduduk($_POST['nik']);
 			$data['anggota']=$this->surat_model->list_anggota($data['individu']['id_kk'],$data['individu']['nik']);
 		}else{
-			unset($data['individu']);
+			$data['individu']=NULL;
 			$data['anggota']=NULL;
 		}
 		$this->get_data_untuk_form($url,$data);
@@ -172,6 +174,18 @@ class Surat extends CI_Controller{
 				$data['laki'] = $this->surat_model->list_penduduk_laki();
 				break;
 			case 'surat_nikah_pria':
+				// Perlu disimpan di SESSION karena belum ketemu cara
+				// memanggil flexbox memakai ajax atau menyimpan data
+				// TODO: cari pengganti flexbox yang sudah tidak di-support lagi
+				if($this->input->post('calon_pria')==2) unset($_SESSION['id_pria']);
+				if($_POST['id_pria'] != ''){
+					$data['pria']=$this->surat_model->get_penduduk($_POST['id_pria']);
+					$_SESSION['id_pria'] = $_POST['id_pria'];
+				}elseif (isset($_SESSION['id_pria'])){
+					$data['pria']=$this->surat_model->get_penduduk($_SESSION['id_pria']);
+				}else{
+					unset($data['pria']);
+				}
 				$status_kawin_pria = array(
 					"BELUM KAWIN" => "Jejaka",
 					"KAWIN" => "Beristri",
@@ -180,16 +194,17 @@ class Surat extends CI_Controller{
 				$data['warganegara'] = $this->penduduk_model->list_warganegara();
 				$data['agama'] = $this->penduduk_model->list_agama();
 				$data['pekerjaan'] = $this->penduduk_model->list_pekerjaan();
+				$data['laki'] = $this->surat_model->list_penduduk_laki();
 				$data['nomor'] = $this->input->post('nomor_main');
-				if (!empty($this->input->post('nik'))) {
-					$id = $this->input->post('nik');
+				if (!empty($this->input->post('id_pria'))) {
+					$id = $this->input->post('id_pria');
 					$data['ayah'] = $this->surat_model->get_data_ayah($id);
 					$data['ibu'] = $this->surat_model->get_data_ibu($id);
 				}
-				if ($data['individu']) {
-					if ($data['individu']['sex_id']==1) {
+				if (isset($data['pria'])) {
+					if ($data['pria']['sex_id']==1) {
 						$data['jenis_pasangan'] = "istri";
-						$data['individu']['status_kawin_pria'] = $status_kawin_pria[$data['individu']['status_kawin']];
+						$data['pria']['status_kawin_pria'] = $status_kawin_pria[$data['pria']['status_kawin']];
 					} else {
 						$data['jenis_pasangan'] = "suami";
 					}

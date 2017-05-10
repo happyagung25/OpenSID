@@ -89,6 +89,9 @@ span.judul_tengah {
 table.form th.indent{
 	padding-left: 30px;
 }
+table.form th.konfirmasi{
+	padding-left: 30px;
+}
 </style>
 
 <div id="pageC">
@@ -128,7 +131,7 @@ table.form th.indent{
 				<th colspan="2">DATA CALON PASANGAN PRIA WARGA DESA</th>
 			</tr>
 			<tr class="pria_desa" <?php if (empty($pria)) echo 'style="display: none;"'; ?>>
-				<th>NIK / Nama</th>
+				<th class="indent">NIK / Nama</th>
 				<td>
 					<form action="" id="main" name="main" method="POST">
 						<input id="nomor_main" name="nomor_main" type="hidden" value="<?php echo $nomor; ?>"/>
@@ -214,7 +217,7 @@ table.form th.indent{
 				<?php if($pria) : ?>
 					<?php if($pria['sex_id']==1) : ?>
 						<tr>
-							<th>Jika pria, terangkan jejaka, duda atau beristri</th>
+							<th class="indent">Jika pria, terangkan jejaka, duda atau beristri</th>
 							<td>
 								<input name="status_kawin_pria" type="text" class="inputbox " size="40" value="<?php echo $pria['status_kawin_pria']?>"/>
 								<span>(Status kawin: <?php echo $pria['status_kawin']?>)</span>
@@ -222,7 +225,7 @@ table.form th.indent{
 						</tr>
 						<?php if($pria['status_kawin']=="KAWIN") : ?>
 							<tr>
-								<th>Jika beristri, berapa istrinya</th>
+								<th class="indent">Jika beristri, berapa istrinya</th>
 								<td>
 									<input name="jumlah_istri" type="text" class="inputbox " size="10" value="1"/>
 								</td>
@@ -380,57 +383,59 @@ table.form th.indent{
 					</tr>
 				<?php endif; ?>
 
-				<tr>
-					<th colspan="2">DATA PASANGAN TERDAHULU </th>
-				</tr>
-				<tr>
-					<th class="indent">Nama <?php echo ucwords($jenis_pasangan)?> Terdahulu</th>
-					<td>
-						<input name="pasangan_dulu" type="text" class="inputbox " size="40"/>
-						<span class="judul_tengah">Binti :</span>
-						<input name="binti" type="text" class="inputbox " size="40"/>
-					</td>
-				</tr>
-				<tr>
-					<th class="indent">Tempat Tanggal Lahir</th>
-					<td>
-						<input name="tmptlahir_istri_dulu" type="text" class="inputbox " size="30"/>
-						<input name="tgllahir_istri_dulu" type="text" class="inputbox  datepicker" size="20"/>
-					</td>
-				</tr>
-				<tr>
-					<th class="indent">Warganegara</th>
-					<td colspan="5">
-				    <select name="wn_istri_dulu">
-				      <option value="">Pilih warganegara</option>
-				      <?php foreach($warganegara as $data){?>
-				        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
-				      <?php }?>
-					  </select>
-						<span class="judul_tengah">Agama</span>
-				    <select name="agama_istri_dulu">
-				      <option value="">Pilih Agama</option>
-				      <?php foreach($agama as $data){?>
-				        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
-				      <?php }?>
-				    </select>
-						<span class="judul_tengah">Pekerjaan</span>
-				    <select name="pek_istri_dulu">
-				      <option value="">Pilih Pekerjaan</option>
-				      <?php  foreach($pekerjaan as $data){?>
-				        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
-				      <?php }?>
-				    </select>
-					</td>
-				</tr>
-				<tr>
-					<th class="indent">Tempat Tinggal</th>
-					<td><input name="alamat_istri_dulu" type="text" class="inputbox " size="80"/></td>
-				</tr>
-				<tr>
-					<th class="indent">Keterangan <?php echo ucwords($jenis_pasangan)?> Dulu</th>
-					<td><input name="ket_istri_dulu" type="text" class="inputbox " size="80"/></td>
-				</tr>
+				<?php if(empty($pria) OR $pria['status_kawin']=="CERAI MATI") : ?>
+					<tr>
+						<th colspan="2">DATA ISTRI TERDAHULU </th>
+					</tr>
+					<tr>
+						<th class="indent">Nama <?php echo ucwords($jenis_pasangan)?> Terdahulu</th>
+						<td>
+							<input name="pasangan_dulu" type="text" class="inputbox " size="40"/>
+							<span class="judul_tengah">Binti :</span>
+							<input name="binti" type="text" class="inputbox " size="40"/>
+						</td>
+					</tr>
+					<tr>
+						<th class="indent">Tempat Tanggal Lahir</th>
+						<td>
+							<input name="tmptlahir_istri_dulu" type="text" class="inputbox " size="30"/>
+							<input name="tgllahir_istri_dulu" type="text" class="inputbox  datepicker" size="20"/>
+						</td>
+					</tr>
+					<tr>
+						<th class="indent">Warganegara</th>
+						<td colspan="5">
+					    <select name="wn_istri_dulu">
+					      <option value="">Pilih warganegara</option>
+					      <?php foreach($warganegara as $data){?>
+					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					      <?php }?>
+						  </select>
+							<span class="judul_tengah">Agama</span>
+					    <select name="agama_istri_dulu">
+					      <option value="">Pilih Agama</option>
+					      <?php foreach($agama as $data){?>
+					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					      <?php }?>
+					    </select>
+							<span class="judul_tengah">Pekerjaan</span>
+					    <select name="pek_istri_dulu">
+					      <option value="">Pilih Pekerjaan</option>
+					      <?php  foreach($pekerjaan as $data){?>
+					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					      <?php }?>
+					    </select>
+						</td>
+					</tr>
+					<tr>
+						<th class="indent">Tempat Tinggal</th>
+						<td><input name="alamat_istri_dulu" type="text" class="inputbox " size="80"/></td>
+					</tr>
+					<tr>
+						<th class="indent">Keterangan <?php echo ucwords($jenis_pasangan)?> Dulu</th>
+						<td><input name="ket_istri_dulu" type="text" class="inputbox " size="80"/></td>
+					</tr>
+				<?php endif; ?>
 
 				<!-- CALON PASANGAN WANITA -->
 				<tr>
@@ -449,7 +454,7 @@ table.form th.indent{
 					<th colspan="2">DATA CALON PASANGAN WANITA WARGA DESA</th>
 				</tr>
 				<tr class="wanita_desa" <?php if (empty($wanita)) echo 'style="display: none;"'; ?>>
-					<th>NIK / Nama</th>
+					<th class="indent">NIK / Nama</th>
 					<td>
 						<div id="id_wanita" name="id_wanita"></div>
 						<?php if($wanita){ //bagian info setelah terpilih

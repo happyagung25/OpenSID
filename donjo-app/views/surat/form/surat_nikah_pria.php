@@ -1,12 +1,25 @@
-<script>
+<script language="javascript" type="text/javascript">
+	function calon_wanita_asal(asal){
+		$('#calon_wanita').val(asal);
+		if(asal == 1){
+			$('.wanita_desa').show();
+			$('.wanita_luar_desa').hide();
+		} else {
+			$('.wanita_desa').hide();
+			$('.wanita_luar_desa').show();
+			$('#id_wanita_copy').val('');
+			$('#'+'main').submit();
+		}
+	}
 	function calon_pria(asal){
 		$('#calon_pria').val(asal);
 		if(asal == 1){
-			$('#pria_desa').show();
-			$('#pria_luar_desa').hide();
+			$('.pria_desa').show();
+			$('.pria_luar_desa').hide();
 		} else {
-			$('#pria_desa').hide();
-			$('#pria_luar_desa').show();
+			$('.pria_desa').hide();
+			$('.pria_luar_desa').show();
+			$('#id_wanita_copy').val($('#id_wanita_hidden').val());
 			$('#'+'main').submit();
 		}
 	}
@@ -29,7 +42,26 @@ watermark: <?php if($pria){?>'<?php echo $pria['nik']?> - <?php echo spaceunpene
 width: 260,
 noResultsText :'Tidak ada no nik yang sesuai..',
 onSelect: function() {
-$('#'+'main').submit();
+	$('#id_wanita_copy').val($('#id_wanita_hidden').val());
+	$('#'+'main').submit();
+}
+});
+
+var wanita = {};
+wanita.results = [
+<?php foreach($perempuan as $data){?>
+{id:'<?php echo $data['id']?>',name:"<?php echo $data['nik']." - ".($data['nama'])?>",info:"<?php echo ($data['alamat'])?>"},
+<?php }?>
+];
+
+$('#id_wanita').flexbox(wanita, {
+resultTemplate: '<div><label>No nik : </label>{name}</div><div>{info}</div>',
+watermark: <?php if($wanita){?>'<?php echo $wanita['nik']?> - <?php echo spaceunpenetration($wanita['nama'])?>'<?php }else{?>'Ketik no nik di sini..'<?php }?>,
+width: 260,
+noResultsText :'Tidak ada no nik yang sesuai..',
+onSelect: function() {
+	$('#id_wanita_copy').val($('#id_wanita_hidden').val());
+	$('#'+'main').submit();
 }
 });
 
@@ -54,7 +86,11 @@ span.judul_tengah {
 .grey {
 	background-color: lightgrey;
 }
+table.form th.indent{
+	padding-left: 30px;
+}
 </style>
+
 <div id="pageC">
 <table class="inner">
 <tr style="vertical-align:top">
@@ -74,6 +110,8 @@ span.judul_tengah {
 					<input type="text" class="inputbox required" size="12" value="<?php echo $nomor; ?>" onchange="nomor_surat(this.value);"/> <span>Terakhir: <?php echo $surat_terakhir['no_surat'];?> (tgl: <?php echo $surat_terakhir['tanggal']?>)</span>
 				</td>
 			</tr>
+
+			<?php $jenis_pasangan = "Istri"; ?>
 			<tr>
 				<th class="grey">CALON PASANGAN PRIA</th>
 			  <td class="grey">
@@ -85,13 +123,20 @@ span.judul_tengah {
 			    </div>
 			  </td>
 			</tr>
-			<tr id="pria_desa" <?php if (empty($pria)) echo 'style="display: none;"'; ?>>
+
+			<tr class="pria_desa" <?php if (empty($pria)) echo 'style="display: none;"'; ?>>
+				<th colspan="2">DATA CALON PASANGAN PRIA WARGA DESA</th>
+			</tr>
+			<tr class="pria_desa" <?php if (empty($pria)) echo 'style="display: none;"'; ?>>
 				<th>NIK / Nama</th>
 				<td>
 					<form action="" id="main" name="main" method="POST">
 						<input id="nomor_main" name="nomor_main" type="hidden" value="<?php echo $nomor; ?>"/>
 						<input id="calon_pria" name="calon_pria" type="hidden" value=""/>
 						<div id="id_pria" name="id_pria"></div>
+						<input id="calon_wanita" name="calon_wanita" type="hidden" value=""/>
+						<!-- Diisi oleh script flexbox wanita -->
+						<input id="id_wanita_copy" name="id_wanita" type="hidden" value="kosong"/>
 					</form>
 					<?php if($pria){ //bagian info setelah terpilih
 							$individu = $pria;
@@ -105,25 +150,24 @@ span.judul_tengah {
 				<input type="hidden" name="nik" value="<?php echo $pria['id']?>">
 
 				<?php if (empty($pria)) : ?>
-					<tr id="pria_luar_desa">
+					<tr class="pria_luar_desa">
 						<th colspan="2">DATA CALON PASANGAN PRIA LUAR DESA</th>
 					</tr>
-					<tr>
-					<tr>
-						<th>Nama Lengkap</th>
+					<tr class="pria_luar_desa">
+						<th class="indent">Nama Lengkap</th>
 						<td>
 							<input name="nama_pasangan_pria" type="text" class="inputbox required" size="30"/>
 						</td>
 					</tr>
-					<tr>
-						<th>Tempat Tanggal Lahir</th>
+					<tr class="pria_luar_desa">
+						<th class="indent">Tempat Tanggal Lahir</th>
 						<td>
 							<input name="tempatlahir_pasangan_pria" type="text" class="inputbox required" size="30"/>
 							<input name="tanggallahir_pasangan_pria" type="text" class="inputbox required datepicker" size="20"/>
 						</td>
 					</tr>
-					<tr>
-						<th>Warganegara</th>
+					<tr class="pria_luar_desa">
+						<th class="indent">Warganegara</th>
 						<td colspan="5">
 					    <select name="wn_pasangan_pria">
 					      <option value="">Pilih warganegara</option>
@@ -147,20 +191,20 @@ span.judul_tengah {
 					    </select>
 						</td>
 					</tr>
-					<tr>
-						<th>Tempat Tinggal</th>
+					<tr class="pria_luar_desa">
+						<th class="indent">Tempat Tinggal</th>
 						<td>
 							<input name="alamat_pasangan_pria" type="text" class="inputbox required" size="40"/>
 						</td>
 					</tr>
-					<tr>
-						<th>Jika pria, terangkan jejaka, duda atau beristri</th>
+					<tr class="pria_luar_desa">
+						<th class="indent">Jika pria, terangkan jejaka, duda atau beristri</th>
 						<td>
 							<input name="status_kawin_pria" type="text" class="inputbox " size="40"/>
 						</td>
 					</tr>
-					<tr>
-						<th>Jika beristri, berapa istrinya</th>
+					<tr class="pria_luar_desa">
+						<th class="indent">Jika beristri, berapa istrinya</th>
 						<td>
 							<input name="jumlah_istri" type="text" class="inputbox " size="10" value=""/>
 						</td>
@@ -193,17 +237,17 @@ span.judul_tengah {
 						<th colspan="2">DATA AYAH</th>
 					</tr>
 					<tr>
-						<th>Nama</th>
+						<th class="indent">Nama</th>
 						<td><?php echo $ayah['nama']?></td>
 					</tr>
 					<tr>
-						<th>Tempat Tanggal Lahir</th>
+						<th class="indent">Tempat Tanggal Lahir</th>
 						<td>
 							<?php echo $ayah['tempatlahir']." / ".tgl_indo_out($ayah['tanggallahir'])?>
 						</td>
 					</tr>
 					<tr>
-						<th>Warganegara</th>
+						<th class="indent">Warganegara</th>
 						<td>
 							<?php echo $ayah['wn']?>
 							<span class="judul_tengah">Agama : </span>
@@ -213,7 +257,7 @@ span.judul_tengah {
 						</td>
 					</tr>
 					<tr>
-						<th>Tempat Tinggal</th>
+						<th class="indent">Tempat Tinggal</th>
 						<td><?php echo $ayah['alamat_wilayah']?></td>
 					</tr>
 				<?php else: ?>
@@ -221,18 +265,18 @@ span.judul_tengah {
 						<th colspan="2">DATA AYAH (Isi jika ayah bukan warga <?php echo strtolower(config_item('sebutan_desa'))?> ini)</th>
 					</tr>
 					<tr>
-						<th>Nama</th>
+						<th class="indent">Nama</th>
 						<td><input name="nama_ayah" type="text" class="inputbox " size="30"/></td>
 					</tr>
 					<tr>
-						<th>Tempat Tanggal Lahir</th>
+						<th class="indent">Tempat Tanggal Lahir</th>
 						<td>
 							<input name="tempatlahir_ayah" type="text" class="inputbox " size="30"/>
 							<input name="tanggallahir_ayah" type="text" class="inputbox  datepicker" size="20"/>
 						</td>
 					</tr>
 					<tr>
-						<th>Warganegara</th>
+						<th class="indent">Warganegara</th>
 						<td colspan="5">
 					    <select name="wn_ayah">
 					      <option value="">Pilih warganegara</option>
@@ -257,7 +301,7 @@ span.judul_tengah {
 						</td>
 					</tr>
 					<tr>
-						<th>Tempat Tinggal</th>
+						<th class="indent">Tempat Tinggal</th>
 						<td><input name="alamat_ayah" type="text" class="inputbox " size="80"/></td>
 					</tr>
 				<?php endif; ?>
@@ -267,17 +311,17 @@ span.judul_tengah {
 						<th colspan="2">DATA IBU</th>
 					</tr>
 					<tr>
-						<th>Nama</th>
+						<th class="indent">Nama</th>
 						<td><?php echo $ibu['nama']?></td>
 					</tr>
 					<tr>
-						<th>Tempat Tanggal Lahir</th>
+						<th class="indent">Tempat Tanggal Lahir</th>
 						<td>
 							<?php echo $ibu['tempatlahir']." / ".tgl_indo_out($ibu['tanggallahir'])?>
 						</td>
 					</tr>
 					<tr>
-						<th>Warganegara</th>
+						<th class="indent">Warganegara</th>
 						<td>
 							<?php echo $ibu['wn']?>
 							<span class="judul_tengah">Agama : </span>
@@ -287,7 +331,7 @@ span.judul_tengah {
 						</td>
 					</tr>
 					<tr>
-						<th>Tempat Tinggal</th>
+						<th class="indent">Tempat Tinggal</th>
 						<td><?php echo $ibu['alamat_wilayah']?></td>
 					</tr>
 				<?php else: ?>
@@ -295,18 +339,18 @@ span.judul_tengah {
 						<th colspan="2">DATA IBU (Isi jika ibu bukan warga <?php echo strtolower(config_item('sebutan_desa'))?> ini)</th>
 					</tr>
 					<tr>
-						<th>Nama</th>
+						<th class="indent">Nama</th>
 						<td><input name="nama_ibu" type="text" class="inputbox " size="30"/></td>
 					</tr>
 					<tr>
-						<th>Tempat Tanggal Lahir</th>
+						<th class="indent">Tempat Tanggal Lahir</th>
 						<td>
 							<input name="tempatlahir_ibu" type="text" class="inputbox " size="30"/>
 							<input name="tanggallahir_ibu" type="text" class="inputbox  datepicker" size="20"/>
 						</td>
 					</tr>
 					<tr>
-						<th>Warganegara</th>
+						<th class="indent">Warganegara</th>
 						<td colspan="5">
 					    <select name="wn_ibu">
 					      <option value="">Pilih warganegara</option>
@@ -331,68 +375,16 @@ span.judul_tengah {
 						</td>
 					</tr>
 					<tr>
-						<th>Tempat Tinggal</th>
+						<th class="indent">Tempat Tinggal</th>
 						<td><input name="alamat_ibu" type="text" class="inputbox " size="80"/></td>
 					</tr>
 				<?php endif; ?>
 
 				<tr>
-					<th colspan="2">DATA CALON PASANGAN</th>
-				</tr>
-				<tr>
-				<tr>
-					<th>Nama Lengkap</th>
-					<td>
-						<input name="nama_pasangan" type="text" class="inputbox required" size="30"/>
-					</td>
-				</tr>
-				<tr>
-					<th>Tempat Tanggal Lahir</th>
-					<td>
-						<input name="tempatlahir_pasangan" type="text" class="inputbox required" size="30"/>
-						<input name="tanggallahir_pasangan" type="text" class="inputbox required datepicker" size="20"/>
-					</td>
-				</tr>
-				<tr>
-					<th>Binti</th>
-					<td><input name="ayah_pasangan" type="text" class="inputbox required" size="15"/></td>
-				</tr>
-				<tr>
-					<th>Warganegara</th>
-					<td colspan="5">
-				    <select name="wn_pasangan">
-				      <option value="">Pilih warganegara</option>
-				      <?php foreach($warganegara as $data){?>
-				        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
-				      <?php }?>
-					  </select>
-						<span class="judul_tengah">Agama</span>
-				    <select name="agama_pasangan">
-				      <option value="">Pilih Agama</option>
-				      <?php foreach($agama as $data){?>
-				        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
-				      <?php }?>
-				    </select>
-						<span class="judul_tengah">Pekerjaan</span>
-				    <select name="pekerjaan_pasangan">
-				      <option value="">Pilih Pekerjaan</option>
-				      <?php  foreach($pekerjaan as $data){?>
-				        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
-				      <?php }?>
-				    </select>
-					</td>
-				</tr>
-				<tr>
-					<th>Tempat Tinggal</th>
-					<td>
-						<input name="alamat_pasangan" type="text" class="inputbox required" size="40"/>
-					</td>
-				</tr>
-				<tr>
 					<th colspan="2">DATA PASANGAN TERDAHULU </th>
 				</tr>
 				<tr>
-					<th>Nama <?php echo ucwords($jenis_pasangan)?> Terdahulu</th>
+					<th class="indent">Nama <?php echo ucwords($jenis_pasangan)?> Terdahulu</th>
 					<td>
 						<input name="pasangan_dulu" type="text" class="inputbox " size="40"/>
 						<span class="judul_tengah">Binti :</span>
@@ -400,14 +392,14 @@ span.judul_tengah {
 					</td>
 				</tr>
 				<tr>
-					<th>Tempat Tanggal Lahir</th>
+					<th class="indent">Tempat Tanggal Lahir</th>
 					<td>
 						<input name="tmptlahir_istri_dulu" type="text" class="inputbox " size="30"/>
 						<input name="tgllahir_istri_dulu" type="text" class="inputbox  datepicker" size="20"/>
 					</td>
 				</tr>
 				<tr>
-					<th>Warganegara</th>
+					<th class="indent">Warganegara</th>
 					<td colspan="5">
 				    <select name="wn_istri_dulu">
 				      <option value="">Pilih warganegara</option>
@@ -432,13 +424,97 @@ span.judul_tengah {
 					</td>
 				</tr>
 				<tr>
-					<th>Tempat Tinggal</th>
+					<th class="indent">Tempat Tinggal</th>
 					<td><input name="alamat_istri_dulu" type="text" class="inputbox " size="80"/></td>
 				</tr>
 				<tr>
-					<th>Keterangan <?php echo ucwords($jenis_pasangan)?> Dulu</th>
+					<th class="indent">Keterangan <?php echo ucwords($jenis_pasangan)?> Dulu</th>
 					<td><input name="ket_istri_dulu" type="text" class="inputbox " size="80"/></td>
 				</tr>
+
+				<!-- CALON PASANGAN WANITA -->
+				<tr>
+					<th class="grey">CALON PASANGAN WANITA</th>
+				  <td class="grey">
+				    <div class="uiradio">
+				      <input type="radio" id="calon_wanita_1" name="calon_wanita" value="1" <?php if(!empty($wanita)){echo 'checked';}?> onchange="calon_wanita_asal(this.value);">
+				      <label for="calon_wanita_1">Warga Desa</label>
+				      <input type="radio" id="calon_wanita_2" name="calon_wanita" value="2" <?php if(empty($wanita)){echo 'checked';}?> onchange="calon_wanita_asal(this.value);"">
+				      <label for="calon_wanita_2">Warga Luar Desa</label>
+				    </div>
+				  </td>
+				</tr>
+
+				<tr class="wanita_desa" <?php if (empty($wanita)) echo 'style="display: none;"'; ?>>
+					<th colspan="2">DATA CALON PASANGAN WANITA WARGA DESA</th>
+				</tr>
+				<tr class="wanita_desa" <?php if (empty($wanita)) echo 'style="display: none;"'; ?>>
+					<th>NIK / Nama</th>
+					<td>
+						<div id="id_wanita" name="id_wanita"></div>
+						<?php if($wanita){ //bagian info setelah terpilih
+								$individu = $wanita;
+							  include("donjo-app/views/surat/form/konfirmasi_pemohon.php");
+						}?>
+					</td>
+				</tr>
+
+				<?php if (empty($wanita)) : ?>
+					<tr class="wanita_luar_desa">
+						<th colspan="2">DATA CALON PASANGAN WANITA LUAR DESA</th>
+					</tr>
+					<tr class="wanita_luar_desa">
+						<th class="indent">Nama Lengkap</th>
+						<td>
+							<input name="nama_pasangan_wanita" type="text" class="inputbox required" size="30"/>
+						</td>
+					</tr>
+					<tr class="wanita_luar_desa">
+						<th class="indent">Tempat Tanggal Lahir</th>
+						<td>
+							<input name="tempatlahir_pasangan_wanita" type="text" class="inputbox required" size="30"/>
+							<input name="tanggallahir_pasangan_wanita" type="text" class="inputbox required datepicker" size="20"/>
+						</td>
+					</tr>
+					<tr class="wanita_luar_desa">
+						<th class="indent">Warganegara</th>
+						<td colspan="5">
+					    <select name="wn_pasangan_wanita">
+					      <option value="">Pilih warganegara</option>
+					      <?php foreach($warganegara as $data){?>
+					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					      <?php }?>
+						  </select>
+							<span class="judul_tengah">Agama</span>
+					    <select name="agama_pasangan_wanita">
+					      <option value="">Pilih Agama</option>
+					      <?php foreach($agama as $data){?>
+					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					      <?php }?>
+					    </select>
+							<span class="judul_tengah">Pekerjaan</span>
+					    <select name="pekerjaan_pasangan_wanita">
+					      <option value="">Pilih Pekerjaan</option>
+					      <?php  foreach($pekerjaan as $data){?>
+					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					      <?php }?>
+					    </select>
+						</td>
+					</tr>
+					<tr class="wanita_luar_desa">
+						<th class="indent">Tempat Tinggal</th>
+						<td>
+							<input name="alamat_pasangan_wanita" type="text" class="inputbox required" size="40"/>
+						</td>
+					</tr>
+					<tr class="wanita_luar_desa">
+						<th class="indent">Jika pria, terangkan jejaka, duda atau beristri</th>
+						<td>
+							<input name="status_kawin_wanita" type="text" class="inputbox " size="40"/>
+						</td>
+					</tr>
+				<?php endif; ?>
+
 				<tr>
 					<th>Staf Pemerintah <?php echo ucwords(config_item('sebutan_desa'))?></th>
 					<td>

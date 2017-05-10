@@ -23,6 +23,7 @@ class Surat extends CI_Controller{
 
 		// Reset untuk surat yang menggunakan session variable
 		unset($_SESSION['id_pria']);
+		unset($_SESSION['id_wanita']);
 
 		$header['modul_ini'] = $this->modul_ini;
 		$this->load->view('header', $header);
@@ -186,15 +187,30 @@ class Surat extends CI_Controller{
 				}else{
 					unset($data['pria']);
 				}
+				if($this->input->post('calon_wanita')==2) unset($_SESSION['id_wanita']);
+				if($_POST['id_wanita'] != ''){
+					$data['wanita']=$this->surat_model->get_penduduk($_POST['id_wanita']);
+					$_SESSION['id_wanita'] = $_POST['id_wanita'];
+				}elseif (isset($_SESSION['id_wanita'])){
+					$data['wanita']=$this->surat_model->get_penduduk($_SESSION['id_wanita']);
+				}else{
+					unset($data['wanita']);
+				}
 				$status_kawin_pria = array(
 					"BELUM KAWIN" => "Jejaka",
 					"KAWIN" => "Beristri",
 					"CERAI HIDUP" => "Duda",
 					"CERAI MATI" => "Duda");
+				$status_kawin_wanita = array(
+					"BELUM KAWIN" => "Gadis",
+					"KAWIN" => "Bersuami",
+					"CERAI HIDUP" => "Janda",
+					"CERAI MATI" => "Janda");
 				$data['warganegara'] = $this->penduduk_model->list_warganegara();
 				$data['agama'] = $this->penduduk_model->list_agama();
 				$data['pekerjaan'] = $this->penduduk_model->list_pekerjaan();
 				$data['laki'] = $this->surat_model->list_penduduk_laki();
+				$data['perempuan'] = $this->surat_model->list_penduduk_perempuan();
 				$data['nomor'] = $this->input->post('nomor_main');
 				if (!empty($this->input->post('id_pria'))) {
 					$id = $this->input->post('id_pria');

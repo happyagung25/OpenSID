@@ -590,18 +590,23 @@
 					$buffer=str_replace("[form_pekerjaan_ibu_pria]",$ibu_pria['pek'],$buffer);
 					$buffer=str_replace("[form_alamat_ibu_pria]","RT $ibu_pria[rt] / RW $ibu_pria[rw] $ibu_pria[dusun] $alamat_desa",$buffer);
 				}
-				# Data istri
-				if ($input['id_istri']) {
-					$istri = $this->get_data_surat($input['id_istri']);
-					$buffer=str_replace("[form_nama_istri]",$istri['nama'],$buffer);
-					$buffer=str_replace("[form_bin_istri]",$istri['nama_ayah'],$buffer);
-					$buffer=str_replace("[form_tempatlahir_istri]",$istri['tempatlahir'],$buffer);
-					$buffer=str_replace("[form_tanggallahir_istri]",tgl_indo_dari_str($istri['tanggallahir']),$buffer);
-					$buffer=str_replace("[form_wn_istri]",$istri['warganegara'],$buffer);
-					$buffer=str_replace("[form_agama_istri]",$istri['agama'],$buffer);
-					$buffer=str_replace("[form_pekerjaan_istri]",$istri['pekerjaan'],$buffer);
-					$buffer=str_replace("[form_alamat_istri]","RT $istri[rt] / RW $istri[rw] $istri[dusun] $alamat_desa",$buffer);
+				// Kode isian yang mungkin tidak terisi
+				$buffer=str_replace("[form_istri_dulu]",$input['istri_dulu'],$buffer);
+
+				// Data pasangan wanita =====================
+				if($input['id_wanita']) {
+					$wanita = $this->get_data_surat($input['id_wanita']);
+					$ibu_wanita = $this->get_data_ibu($input['id_wanita']);
+					$ayah_wanita = $this->get_data_ayah($input['id_wanita']);
+					$buffer=str_replace("[form_agama_wanita]","$wanita[agama]",$buffer);
+					$buffer=str_replace("[form_alamat_wanita]","$wanita[alamat_wilayah]",$buffer);
+					$buffer=str_replace("[form_nama_wanita]","$wanita[nama]",$buffer);
+					$buffer=str_replace("[form_pekerjaan_wanita]","$wanita[pekerjaan]",$buffer);
+					$buffer=str_replace("[form_tempatlahir_wanita]","$wanita[tempatlahir]",$buffer);
+					$buffer=str_replace("[form_tanggallahir_wanita]","$wanita[tanggallahir]",$buffer);
+					$buffer=str_replace("[form_wn_wanita]","$wanita[warganegara]",$buffer);
 				}
+
 				break;
 
 			case 'surat_permohonan_cerai':
@@ -949,12 +954,6 @@
 		$data['config'] = $this->get_data_desa();
 		$data['surat'] = $this->get_surat($url);
 		switch ($url) {
-			case 'surat_nikah':
-				$id = $data['input']['id_pria'];
-				$data['pria'] = $this->get_data_surat($id);
-				$data['ayah_pria'] = $this->get_data_ayah($id);
-				$data['ibu_pria'] = $this->get_data_ibu($id);
-				break;
 			default:
 				$id = $data['input']['nik'];
 				$data['individu'] = $this->get_data_surat($id);

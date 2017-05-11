@@ -151,6 +151,7 @@ table.form th.konfirmasi{
 			<form id="validasi" action="<?php echo $form_action?>" method="POST" target="_blank">
 				<input id="nomor" name="nomor" type="hidden" value=""/>
 				<input type="hidden" name="id_pria" value="<?php echo $pria['id']?>">
+				<input type="hidden" name="id_wanita" value="<?php echo $wanita['id']?>">
 
 				<?php if (empty($pria)) : ?>
 					<tr class="pria_luar_desa">
@@ -481,34 +482,34 @@ table.form th.konfirmasi{
 					<tr class="wanita_luar_desa">
 						<th class="indent">Nama Lengkap</th>
 						<td>
-							<input name="nama_pasangan_wanita" type="text" class="inputbox required" size="30"/>
+							<input name="nama_wanita" type="text" class="inputbox required" size="30"/>
 						</td>
 					</tr>
 					<tr class="wanita_luar_desa">
 						<th class="indent">Tempat Tanggal Lahir</th>
 						<td>
-							<input name="tempatlahir_pasangan_wanita" type="text" class="inputbox required" size="30"/>
-							<input name="tanggallahir_pasangan_wanita" type="text" class="inputbox required datepicker" size="20"/>
+							<input name="tempatlahir_wanita" type="text" class="inputbox required" size="30"/>
+							<input name="tanggallahir_wanita" type="text" class="inputbox required datepicker" size="20"/>
 						</td>
 					</tr>
 					<tr class="wanita_luar_desa">
 						<th class="indent">Warganegara</th>
 						<td colspan="5">
-					    <select name="wn_pasangan_wanita">
+					    <select name="wn_wanita">
 					      <option value="">Pilih warganegara</option>
 					      <?php foreach($warganegara as $data){?>
 					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
 					      <?php }?>
 						  </select>
 							<span class="judul_tengah">Agama</span>
-					    <select name="agama_pasangan_wanita">
+					    <select name="agama_wanita">
 					      <option value="">Pilih Agama</option>
 					      <?php foreach($agama as $data){?>
 					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
 					      <?php }?>
 					    </select>
 							<span class="judul_tengah">Pekerjaan</span>
-					    <select name="pekerjaan_pasangan_wanita">
+					    <select name="pekerjaan_wanita">
 					      <option value="">Pilih Pekerjaan</option>
 					      <?php  foreach($pekerjaan as $data){?>
 					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
@@ -519,7 +520,7 @@ table.form th.konfirmasi{
 					<tr class="wanita_luar_desa">
 						<th class="indent">Tempat Tinggal</th>
 						<td>
-							<input name="alamat_pasangan_wanita" type="text" class="inputbox required" size="40"/>
+							<input name="alamat_wanita" type="text" class="inputbox required" size="40"/>
 						</td>
 					</tr>
 					<tr class="wanita_luar_desa">

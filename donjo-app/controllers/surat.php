@@ -114,9 +114,21 @@ class Surat extends CI_Controller{
 		$z=$_POST['nomor'];
 
 		$id = $_POST['nik'];
-		// surat_persetujuan_mempelai id-nya suami atau istri
-		if (!$id) $id = $_POST['id_suami'];
-		if (!$id) $id = $_POST['id_istri'];
+		switch ($url) {
+			case 'surat_persetujuan_mempelai':
+				// surat_persetujuan_mempelai id-nya suami atau istri
+				if (!$id) $id = $_POST['id_suami'];
+				if (!$id) $id = $_POST['id_istri'];
+				break;
+			case 'surat_nikah':
+				// id-nya calon pasangan pria atau wanita
+				if (!$id) $id = $_POST['id_pria'];
+				if (!$id) $id = $_POST['id_wanita'];
+				break;
+			default:
+				# code...
+				break;
+		}
 		$sql = "SELECT nik FROM tweb_penduduk WHERE id=?";
 		$query = $this->db->query($sql,$id);
 		$hasil  = $query->row_array();
@@ -174,7 +186,7 @@ class Surat extends CI_Controller{
 			case 'surat_pernyataan_akta':
 				$data['laki'] = $this->surat_model->list_penduduk_laki();
 				break;
-			case 'surat_nikah_pria':
+			case 'surat_nikah':
 				// Perlu disimpan di SESSION karena belum ketemu cara
 				// memanggil flexbox memakai ajax atau menyimpan data
 				// TODO: cari pengganti flexbox yang sudah tidak di-support lagi
@@ -210,12 +222,11 @@ class Surat extends CI_Controller{
 				$data['agama'] = $this->penduduk_model->list_agama();
 				$data['pekerjaan'] = $this->penduduk_model->list_pekerjaan();
 				$data['laki'] = $this->surat_model->list_penduduk_laki();
-				$data['perempuan'] = $this->surat_model->list_penduduk_perempuan();
 				$data['nomor'] = $this->input->post('nomor_main');
-				if (!empty($this->input->post('id_pria'))) {
-					$id = $this->input->post('id_pria');
-					$data['ayah'] = $this->surat_model->get_data_ayah($id);
-					$data['ibu'] = $this->surat_model->get_data_ibu($id);
+				if (isset($_SESSION['id_pria'])) {
+					$id = $_SESSION['id_pria'];
+					$data['ayah_pria'] = $this->surat_model->get_data_ayah($id);
+					$data['ibu_pria'] = $this->surat_model->get_data_ibu($id);
 				}
 				if (isset($data['pria'])) {
 					if ($data['pria']['sex_id']==1) {

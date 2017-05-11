@@ -150,7 +150,7 @@ table.form th.konfirmasi{
 
 			<form id="validasi" action="<?php echo $form_action?>" method="POST" target="_blank">
 				<input id="nomor" name="nomor" type="hidden" value=""/>
-				<input type="hidden" name="nik" value="<?php echo $pria['id']?>">
+				<input type="hidden" name="id_pria" value="<?php echo $pria['id']?>">
 
 				<?php if (empty($pria)) : ?>
 					<tr class="pria_luar_desa">
@@ -203,7 +203,12 @@ table.form th.konfirmasi{
 					<tr class="pria_luar_desa">
 						<th class="indent">Jika pria, terangkan jejaka, duda atau beristri</th>
 						<td>
-							<input name="status_kawin_pria" type="text" class="inputbox " size="40"/>
+					    <select name="status_kawin_pria">
+					      <option value="">Pilih Status Kawin</option>
+					      <?php  foreach($kode['status_kawin_pria'] as $data){?>
+					        <option value="<?php echo $data?>"><?php echo ucwords($data)?></option>
+					      <?php }?>
+					    </select>
 						</td>
 					</tr>
 					<tr class="pria_luar_desa">
@@ -219,7 +224,12 @@ table.form th.konfirmasi{
 						<tr>
 							<th class="indent">Jika pria, terangkan jejaka, duda atau beristri</th>
 							<td>
-								<input name="status_kawin_pria" type="text" class="inputbox " size="40" value="<?php echo $pria['status_kawin_pria']?>"/>
+						    <select name="status_kawin_pria">
+						      <option value="">Pilih Status Kawin</option>
+						      <?php  foreach($kode['status_kawin_pria'] as $data){?>
+						        <option value="<?php echo $data?>" <?php if($pria['status_kawin_pria']==$data) echo 'selected';?>><?php echo ucwords($data)?></option>
+						      <?php }?>
+						    </select>
 								<span>(Status kawin: <?php echo $pria['status_kawin']?>)</span>
 							</td>
 						</tr>
@@ -235,67 +245,67 @@ table.form th.konfirmasi{
 						<?php endif; ?>
 					<?php endif; ?>
 				<?php endif; ?>
-				<?php if ($ayah) : ?>
+				<?php if ($ayah_pria) : ?>
 					<tr>
-						<th colspan="2">DATA AYAH</th>
+						<th colspan="2">DATA AYAH PASANGAN PRIA</th>
 					</tr>
 					<tr>
 						<th class="indent">Nama</th>
-						<td><?php echo $ayah['nama']?></td>
+						<td><?php echo $ayah_pria['nama']?></td>
 					</tr>
 					<tr>
 						<th class="indent">Tempat Tanggal Lahir</th>
 						<td>
-							<?php echo $ayah['tempatlahir']." / ".tgl_indo_out($ayah['tanggallahir'])?>
+							<?php echo $ayah_pria['tempatlahir']." / ".tgl_indo_out($ayah['tanggallahir'])?>
 						</td>
 					</tr>
 					<tr>
 						<th class="indent">Warganegara</th>
 						<td>
-							<?php echo $ayah['wn']?>
+							<?php echo $ayah_pria['wn']?>
 							<span class="judul_tengah">Agama : </span>
-							<?php echo $ayah['agama']?>
+							<?php echo $ayah_pria['agama']?>
 							<span class="judul_tengah">Pekerjaan : </span>
-							<?php echo $ayah['pek']?>
+							<?php echo $ayah_pria['pek']?>
 						</td>
 					</tr>
 					<tr>
 						<th class="indent">Tempat Tinggal</th>
-						<td><?php echo $ayah['alamat_wilayah']?></td>
+						<td><?php echo $ayah_pria['alamat_wilayah']?></td>
 					</tr>
 				<?php else: ?>
 					<tr>
-						<th colspan="2">DATA AYAH (Isi jika ayah bukan warga <?php echo strtolower(config_item('sebutan_desa'))?> ini)</th>
+						<th colspan="2">DATA AYAH PASANGAN PRIA (Isi jika ayah bukan warga <?php echo strtolower(config_item('sebutan_desa'))?> ini)</th>
 					</tr>
 					<tr>
 						<th class="indent">Nama</th>
-						<td><input name="nama_ayah" type="text" class="inputbox " size="30"/></td>
+						<td><input name="nama_ayah_pria" type="text" class="inputbox " size="30"/></td>
 					</tr>
 					<tr>
 						<th class="indent">Tempat Tanggal Lahir</th>
 						<td>
-							<input name="tempatlahir_ayah" type="text" class="inputbox " size="30"/>
-							<input name="tanggallahir_ayah" type="text" class="inputbox  datepicker" size="20"/>
+							<input name="tempatlahir_ayah_pria" type="text" class="inputbox " size="30"/>
+							<input name="tanggallahir_ayah_pria" type="text" class="inputbox  datepicker" size="20"/>
 						</td>
 					</tr>
 					<tr>
 						<th class="indent">Warganegara</th>
 						<td colspan="5">
-					    <select name="wn_ayah">
+					    <select name="wn_ayah_pria">
 					      <option value="">Pilih warganegara</option>
 					      <?php foreach($warganegara as $data){?>
 					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
 					      <?php }?>
 						  </select>
 							<span class="judul_tengah">Agama</span>
-					    <select name="agama_ayah">
+					    <select name="agama_ayah_pria">
 					      <option value="">Pilih Agama</option>
 					      <?php foreach($agama as $data){?>
 					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
 					      <?php }?>
 					    </select>
 							<span class="judul_tengah">Pekerjaan</span>
-					    <select name="pekerjaan_ayah">
+					    <select name="pekerjaan_ayah_pria">
 					      <option value="">Pilih Pekerjaan</option>
 					      <?php  foreach($pekerjaan as $data){?>
 					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
@@ -305,71 +315,71 @@ table.form th.konfirmasi{
 					</tr>
 					<tr>
 						<th class="indent">Tempat Tinggal</th>
-						<td><input name="alamat_ayah" type="text" class="inputbox " size="80"/></td>
+						<td><input name="alamat_ayah_pria" type="text" class="inputbox " size="80"/></td>
 					</tr>
 				<?php endif; ?>
 
-				<?php if ($ibu) : ?>
+				<?php if ($ibu_pria) : ?>
 					<tr>
-						<th colspan="2">DATA IBU</th>
+						<th colspan="2">DATA IBU PASANGAN PRIA</th>
 					</tr>
 					<tr>
 						<th class="indent">Nama</th>
-						<td><?php echo $ibu['nama']?></td>
+						<td><?php echo $ibu_pria['nama']?></td>
 					</tr>
 					<tr>
 						<th class="indent">Tempat Tanggal Lahir</th>
 						<td>
-							<?php echo $ibu['tempatlahir']." / ".tgl_indo_out($ibu['tanggallahir'])?>
+							<?php echo $ibu_pria['tempatlahir']." / ".tgl_indo_out($ibu['tanggallahir'])?>
 						</td>
 					</tr>
 					<tr>
 						<th class="indent">Warganegara</th>
 						<td>
-							<?php echo $ibu['wn']?>
+							<?php echo $ibu_pria['wn']?>
 							<span class="judul_tengah">Agama : </span>
-							<?php echo $ibu['agama']?>
+							<?php echo $ibu_pria['agama']?>
 							<span class="judul_tengah">Pekerjaan : </span>
-							<?php echo $ibu['pek']?>
+							<?php echo $ibu_pria['pek']?>
 						</td>
 					</tr>
 					<tr>
 						<th class="indent">Tempat Tinggal</th>
-						<td><?php echo $ibu['alamat_wilayah']?></td>
+						<td><?php echo $ibu_pria['alamat_wilayah']?></td>
 					</tr>
 				<?php else: ?>
 					<tr>
-						<th colspan="2">DATA IBU (Isi jika ibu bukan warga <?php echo strtolower(config_item('sebutan_desa'))?> ini)</th>
+						<th colspan="2">DATA IBU PASANGAN PRIA (Isi jika ibu bukan warga <?php echo strtolower(config_item('sebutan_desa'))?> ini)</th>
 					</tr>
 					<tr>
 						<th class="indent">Nama</th>
-						<td><input name="nama_ibu" type="text" class="inputbox " size="30"/></td>
+						<td><input name="nama_ibu_pria" type="text" class="inputbox " size="30"/></td>
 					</tr>
 					<tr>
 						<th class="indent">Tempat Tanggal Lahir</th>
 						<td>
-							<input name="tempatlahir_ibu" type="text" class="inputbox " size="30"/>
-							<input name="tanggallahir_ibu" type="text" class="inputbox  datepicker" size="20"/>
+							<input name="tempatlahir_ibu_pria" type="text" class="inputbox " size="30"/>
+							<input name="tanggallahir_ibu_pria" type="text" class="inputbox  datepicker" size="20"/>
 						</td>
 					</tr>
 					<tr>
 						<th class="indent">Warganegara</th>
 						<td colspan="5">
-					    <select name="wn_ibu">
+					    <select name="wn_ibu_pria">
 					      <option value="">Pilih warganegara</option>
 					      <?php foreach($warganegara as $data){?>
 					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
 					      <?php }?>
 						  </select>
 							<span class="judul_tengah">Agama</span>
-					    <select name="agama_ibu">
+					    <select name="agama_ibu_pria">
 					      <option value="">Pilih Agama</option>
 					      <?php foreach($agama as $data){?>
 					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
 					      <?php }?>
 					    </select>
 							<span class="judul_tengah">Pekerjaan</span>
-					    <select name="pekerjaan_ibu">
+					    <select name="pekerjaan_ibu_pria">
 					      <option value="">Pilih Pekerjaan</option>
 					      <?php  foreach($pekerjaan as $data){?>
 					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
@@ -379,7 +389,7 @@ table.form th.konfirmasi{
 					</tr>
 					<tr>
 						<th class="indent">Tempat Tinggal</th>
-						<td><input name="alamat_ibu" type="text" class="inputbox " size="80"/></td>
+						<td><input name="alamat_ibu_pria" type="text" class="inputbox " size="80"/></td>
 					</tr>
 				<?php endif; ?>
 
@@ -390,7 +400,7 @@ table.form th.konfirmasi{
 					<tr>
 						<th class="indent">Nama <?php echo ucwords($jenis_pasangan)?> Terdahulu</th>
 						<td>
-							<input name="pasangan_dulu" type="text" class="inputbox " size="40"/>
+							<input name="istri_dulu" type="text" class="inputbox " size="40"/>
 							<span class="judul_tengah">Binti :</span>
 							<input name="binti" type="text" class="inputbox " size="40"/>
 						</td>

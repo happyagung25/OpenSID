@@ -566,7 +566,8 @@
 					$buffer=str_replace("[pekerjaan_pria]","$pria[pekerjaan]",$buffer);
 					$buffer=str_replace("[sex_pria]","$pria[sex]",$buffer);
 					$buffer=str_replace("[status_pria]","$pria[status_kawin]",$buffer);
-					$buffer=str_replace("[ttl_pria]","$pria[tempatlahir]/$tgllhr",$buffer);
+					$buffer=str_replace("[tempatlahir_pria]",$pria[tempatlahir],$buffer);
+					$buffer=str_replace("[tanggallahir_pria]",$pria[tanggallahir],$buffer);
 					$buffer=str_replace("[usia_pria]","$pria[umur] Tahun",$buffer);
 					$buffer=str_replace("[warga_negara_pria]","$pria[warganegara]",$buffer);
 				}

@@ -4,6 +4,8 @@
 		if(asal == 1){
 			$('.wanita_desa').show();
 			$('.wanita_luar_desa').hide();
+			// Mungkin bug di jquery? Terpaksa hapus class radio button
+			$('#label_calon_wanita_2').removeClass('ui-state-active');
 		} else {
 			$('.wanita_desa').hide();
 			$('.wanita_luar_desa').show();
@@ -61,7 +63,11 @@ width: 260,
 noResultsText :'Tidak ada no nik yang sesuai..',
 onSelect: function() {
 	$('#id_wanita_copy').val($('#id_wanita_hidden').val());
-	$('#'+'main').submit();
+	// $('#'+'main').submit();
+	$('#id_wanita_validasi').val($('#id_wanita_hidden').val());
+	$('#'+'validasi').attr('action','')
+	$('#'+'validasi').attr('target','')
+	$('#'+'validasi').submit();
 }
 });
 
@@ -151,7 +157,7 @@ table.form th.konfirmasi{
 			<form id="validasi" action="<?php echo $form_action?>" method="POST" target="_blank">
 				<input id="nomor" name="nomor" type="hidden" value=""/>
 				<input type="hidden" name="id_pria" value="<?php echo $pria['id']?>">
-				<input type="hidden" name="id_wanita" value="<?php echo $wanita['id']?>">
+				<input id="id_wanita_validasi" name="id_wanita" type="hidden" value="kosong"/>
 
 				<?php if (empty($pria)) : ?>
 					<tr class="pria_luar_desa">
@@ -160,34 +166,34 @@ table.form th.konfirmasi{
 					<tr class="pria_luar_desa">
 						<th class="indent">Nama Lengkap</th>
 						<td>
-							<input name="nama_pasangan_pria" type="text" class="inputbox required" size="30"/>
+							<input name="nama_pria" type="text" class="inputbox" size="30" value="<?php echo $_SESSION['post']['nama_pria']?>"/>
 						</td>
 					</tr>
 					<tr class="pria_luar_desa">
 						<th class="indent">Tempat Tanggal Lahir</th>
 						<td>
-							<input name="tempatlahir_pasangan_pria" type="text" class="inputbox required" size="30"/>
-							<input name="tanggallahir_pasangan_pria" type="text" class="inputbox required datepicker" size="20"/>
+							<input name="tempatlahir_pria" type="text" class="inputbox" size="30"/>
+							<input name="tanggallahir_pria" type="text" class="inputbox datepicker" size="20"/>
 						</td>
 					</tr>
 					<tr class="pria_luar_desa">
 						<th class="indent">Warganegara</th>
 						<td colspan="5">
-					    <select name="wn_pasangan_pria">
+					    <select name="wn_pria">
 					      <option value="">Pilih warganegara</option>
 					      <?php foreach($warganegara as $data){?>
 					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
 					      <?php }?>
 						  </select>
 							<span class="judul_tengah">Agama</span>
-					    <select name="agama_pasangan_pria">
+					    <select name="agama_pria">
 					      <option value="">Pilih Agama</option>
 					      <?php foreach($agama as $data){?>
 					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
 					      <?php }?>
 					    </select>
 							<span class="judul_tengah">Pekerjaan</span>
-					    <select name="pekerjaan_pasangan_pria">
+					    <select name="pekerjaan_pria">
 					      <option value="">Pilih Pekerjaan</option>
 					      <?php  foreach($pekerjaan as $data){?>
 					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
@@ -198,7 +204,7 @@ table.form th.konfirmasi{
 					<tr class="pria_luar_desa">
 						<th class="indent">Tempat Tinggal</th>
 						<td>
-							<input name="alamat_pasangan_pria" type="text" class="inputbox required" size="40"/>
+							<input name="alamat_pria" type="text" class="inputbox" size="40"/>
 						</td>
 					</tr>
 					<tr class="pria_luar_desa">
@@ -456,7 +462,7 @@ table.form th.konfirmasi{
 				      <input type="radio" id="calon_wanita_1" name="calon_wanita" value="1" <?php if(!empty($wanita)){echo 'checked';}?> onchange="calon_wanita_asal(this.value);">
 				      <label for="calon_wanita_1">Warga Desa</label>
 				      <input type="radio" id="calon_wanita_2" name="calon_wanita" value="2" <?php if(empty($wanita)){echo 'checked';}?> onchange="calon_wanita_asal(this.value);"">
-				      <label for="calon_wanita_2">Warga Luar Desa</label>
+				      <label id="label_calon_wanita_2" for="calon_wanita_2">Warga Luar Desa</label>
 				    </div>
 				  </td>
 				</tr>
@@ -482,14 +488,14 @@ table.form th.konfirmasi{
 					<tr class="wanita_luar_desa">
 						<th class="indent">Nama Lengkap</th>
 						<td>
-							<input name="nama_wanita" type="text" class="inputbox required" size="30"/>
+							<input name="nama_wanita" type="text" class="inputbox" size="30"/>
 						</td>
 					</tr>
 					<tr class="wanita_luar_desa">
 						<th class="indent">Tempat Tanggal Lahir</th>
 						<td>
-							<input name="tempatlahir_wanita" type="text" class="inputbox required" size="30"/>
-							<input name="tanggallahir_wanita" type="text" class="inputbox required datepicker" size="20"/>
+							<input name="tempatlahir_wanita" type="text" class="inputbox" size="30"/>
+							<input name="tanggallahir_wanita" type="text" class="inputbox datepicker" size="20"/>
 						</td>
 					</tr>
 					<tr class="wanita_luar_desa">
@@ -520,7 +526,7 @@ table.form th.konfirmasi{
 					<tr class="wanita_luar_desa">
 						<th class="indent">Tempat Tinggal</th>
 						<td>
-							<input name="alamat_wanita" type="text" class="inputbox required" size="40"/>
+							<input name="alamat_wanita" type="text" class="inputbox" size="40"/>
 						</td>
 					</tr>
 					<tr class="wanita_luar_desa">
@@ -548,7 +554,7 @@ table.form th.konfirmasi{
 						<select name="jabatan"  class="inputbox required">
 							<option value="">Pilih Jabatan</option>
 							<?php foreach($pamong AS $data){?>
-								<option ><?php echo unpenetration($data['jabatan'])?></option>
+								<option <?php if($data['jabatan']==$_SESSION['post']['jabatan']) echo 'selected'?>><?php echo unpenetration($data['jabatan'])?></option>
 							<?php }?>
 						</select>
 					</td>

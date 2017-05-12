@@ -24,6 +24,7 @@ class Surat extends CI_Controller{
 		// Reset untuk surat yang menggunakan session variable
 		unset($_SESSION['id_pria']);
 		unset($_SESSION['id_wanita']);
+		unset($_SESSION['post']);
 
 		$header['modul_ini'] = $this->modul_ini;
 		$this->load->view('header', $header);
@@ -190,6 +191,7 @@ class Surat extends CI_Controller{
 				// Perlu disimpan di SESSION karena belum ketemu cara
 				// memanggil flexbox memakai ajax atau menyimpan data
 				// TODO: cari pengganti flexbox yang sudah tidak di-support lagi
+				$_SESSION['post'] = $_POST;
 				if($this->input->post('calon_pria')==2) unset($_SESSION['id_pria']);
 				if($_POST['id_pria'] != ''){
 					$data['pria']=$this->surat_model->get_penduduk($_POST['id_pria']);

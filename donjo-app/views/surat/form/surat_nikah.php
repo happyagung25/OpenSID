@@ -116,7 +116,7 @@ table.form th.konfirmasi{
 			<tr>
 				<th>Nomor Surat</th>
 				<td>
-					<input type="text" class="inputbox required" size="12" value="<?php echo $nomor; ?>" onchange="nomor_surat(this.value);"/> <span>Terakhir: <?php echo $surat_terakhir['no_surat'];?> (tgl: <?php echo $surat_terakhir['tanggal']?>)</span>
+					<input type="text" class="inputbox required" size="12" value="<?php echo $_SESSION['post']['nomor']; ?>" onchange="nomor_surat(this.value);"/> <span>Terakhir: <?php echo $surat_terakhir['no_surat'];?> (tgl: <?php echo $surat_terakhir['tanggal']?>)</span>
 				</td>
 			</tr>
 
@@ -172,8 +172,8 @@ table.form th.konfirmasi{
 					<tr class="pria_luar_desa">
 						<th class="indent">Tempat Tanggal Lahir</th>
 						<td>
-							<input name="tempatlahir_pria" type="text" class="inputbox" size="30"/>
-							<input name="tanggallahir_pria" type="text" class="inputbox datepicker" size="20"/>
+							<input name="tempatlahir_pria" type="text" class="inputbox" size="30" value="<?php echo $_SESSION['post']['tempatlahir_pria']?>"/>
+							<input name="tanggallahir_pria" type="text" class="inputbox datepicker" size="20" value="<?php echo $_SESSION['post']['tempatlahir_pria']?>"/>
 						</td>
 					</tr>
 					<tr class="pria_luar_desa">
@@ -182,21 +182,21 @@ table.form th.konfirmasi{
 					    <select name="wn_pria">
 					      <option value="">Pilih warganegara</option>
 					      <?php foreach($warganegara as $data){?>
-					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					        <option value="<?php echo $data['nama']?>" <?php if($data['nama']==$_SESSION['post']['wn_pria']) echo 'selected'?>><?php echo strtoupper($data['nama'])?></option>
 					      <?php }?>
 						  </select>
 							<span class="judul_tengah">Agama</span>
 					    <select name="agama_pria">
 					      <option value="">Pilih Agama</option>
 					      <?php foreach($agama as $data){?>
-					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					        <option value="<?php echo $data['nama']?>" <?php if($data['nama']==$_SESSION['post']['agama_pria']) echo 'selected'?>><?php echo ucwords($data['nama'])?></option>
 					      <?php }?>
 					    </select>
 							<span class="judul_tengah">Pekerjaan</span>
 					    <select name="pekerjaan_pria">
 					      <option value="">Pilih Pekerjaan</option>
 					      <?php  foreach($pekerjaan as $data){?>
-					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					        <option value="<?php echo $data['nama']?>" <?php if($data['nama']==$_SESSION['post']['pekerjaan_pria']) echo 'selected'?>><?php echo ucwords($data['nama'])?></option>
 					      <?php }?>
 					    </select>
 						</td>
@@ -204,7 +204,7 @@ table.form th.konfirmasi{
 					<tr class="pria_luar_desa">
 						<th class="indent">Tempat Tinggal</th>
 						<td>
-							<input name="alamat_pria" type="text" class="inputbox" size="40"/>
+							<input name="alamat_pria" type="text" class="inputbox" size="40" value="<?php echo $_SESSION['post']['alamat_pria']?>"/>
 						</td>
 					</tr>
 					<tr class="pria_luar_desa">
@@ -213,7 +213,7 @@ table.form th.konfirmasi{
 					    <select name="status_kawin_pria">
 					      <option value="">Pilih Status Kawin</option>
 					      <?php  foreach($kode['status_kawin_pria'] as $data){?>
-					        <option value="<?php echo $data?>"><?php echo ucwords($data)?></option>
+					        <option value="<?php echo $data?>" <?php if($data['nama']==$_SESSION['post']['status_kawin_pria']) echo 'selected'?>><?php echo ucwords($data)?></option>
 					      <?php }?>
 					    </select>
 						</td>
@@ -221,7 +221,7 @@ table.form th.konfirmasi{
 					<tr class="pria_luar_desa">
 						<th class="indent">Jika beristri, berapa istrinya</th>
 						<td>
-							<input name="jumlah_istri" type="text" class="inputbox " size="10" value=""/>
+							<input name="jumlah_istri" type="text" class="inputbox " size="10" value="<?php echo $_SESSION['post']['jumlah_istri']?>"/>
 						</td>
 					</tr>
 				<?php endif; ?>
@@ -301,21 +301,21 @@ table.form th.konfirmasi{
 					    <select name="wn_ayah_pria">
 					      <option value="">Pilih warganegara</option>
 					      <?php foreach($warganegara as $data){?>
-					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					        <option value="<?php echo $data['nama']?>"> <?php echo strtoupper($data['nama'])?></option>
 					      <?php }?>
 						  </select>
 							<span class="judul_tengah">Agama</span>
 					    <select name="agama_ayah_pria">
 					      <option value="">Pilih Agama</option>
 					      <?php foreach($agama as $data){?>
-					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					        <option value="<?php echo $data['nama']?>"> <?php echo ucwords($data['nama'])?></option>
 					      <?php }?>
 					    </select>
 							<span class="judul_tengah">Pekerjaan</span>
 					    <select name="pekerjaan_ayah_pria">
 					      <option value="">Pilih Pekerjaan</option>
 					      <?php  foreach($pekerjaan as $data){?>
-					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					        <option value="<?php echo $data['nama']?>"> <?php echo ucwords($data['nama'])?></option>
 					      <?php }?>
 					    </select>
 						</td>
@@ -375,21 +375,21 @@ table.form th.konfirmasi{
 					    <select name="wn_ibu_pria">
 					      <option value="">Pilih warganegara</option>
 					      <?php foreach($warganegara as $data){?>
-					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					        <option value="<?php echo $data['nama']?>"> <?php echo strtoupper($data['nama'])?></option>
 					      <?php }?>
 						  </select>
 							<span class="judul_tengah">Agama</span>
 					    <select name="agama_ibu_pria">
 					      <option value="">Pilih Agama</option>
 					      <?php foreach($agama as $data){?>
-					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					        <option value="<?php echo $data['nama']?>"> <?php echo ucwords($data['nama'])?></option>
 					      <?php }?>
 					    </select>
 							<span class="judul_tengah">Pekerjaan</span>
 					    <select name="pekerjaan_ibu_pria">
 					      <option value="">Pilih Pekerjaan</option>
 					      <?php  foreach($pekerjaan as $data){?>
-					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					        <option value="<?php echo $data['nama']?>"> <?php echo ucwords($data['nama'])?></option>
 					      <?php }?>
 					    </select>
 						</td>
@@ -425,21 +425,21 @@ table.form th.konfirmasi{
 					    <select name="wn_istri_dulu">
 					      <option value="">Pilih warganegara</option>
 					      <?php foreach($warganegara as $data){?>
-					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					        <option value="<?php echo $data['nama']?>"> <?php echo strtoupper($data['nama'])?></option>
 					      <?php }?>
 						  </select>
 							<span class="judul_tengah">Agama</span>
 					    <select name="agama_istri_dulu">
 					      <option value="">Pilih Agama</option>
 					      <?php foreach($agama as $data){?>
-					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					        <option value="<?php echo $data['nama']?>"> <?php echo ucwords($data['nama'])?></option>
 					      <?php }?>
 					    </select>
 							<span class="judul_tengah">Pekerjaan</span>
 					    <select name="pek_istri_dulu">
 					      <option value="">Pilih Pekerjaan</option>
 					      <?php  foreach($pekerjaan as $data){?>
-					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					        <option value="<?php echo $data['nama']?>"> <?php echo ucwords($data['nama'])?></option>
 					      <?php }?>
 					    </select>
 						</td>
@@ -504,21 +504,21 @@ table.form th.konfirmasi{
 					    <select name="wn_wanita">
 					      <option value="">Pilih warganegara</option>
 					      <?php foreach($warganegara as $data){?>
-					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					        <option value="<?php echo $data['nama']?>"> <?php echo strtoupper($data['nama'])?></option>
 					      <?php }?>
 						  </select>
 							<span class="judul_tengah">Agama</span>
 					    <select name="agama_wanita">
 					      <option value="">Pilih Agama</option>
 					      <?php foreach($agama as $data){?>
-					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					        <option value="<?php echo $data['nama']?>"> <?php echo ucwords($data['nama'])?></option>
 					      <?php }?>
 					    </select>
 							<span class="judul_tengah">Pekerjaan</span>
 					    <select name="pekerjaan_wanita">
 					      <option value="">Pilih Pekerjaan</option>
 					      <?php  foreach($pekerjaan as $data){?>
-					        <option value="<?php echo $data['nama']?>"><?php echo strtoupper($data['nama'])?></option>
+					        <option value="<?php echo $data['nama']?>"> <?php echo ucwords($data['nama'])?></option>
 					      <?php }?>
 					    </select>
 						</td>
@@ -543,7 +543,7 @@ table.form th.konfirmasi{
 						<select name="pamong"  class="inputbox required" >
 							<option value="">Pilih Staf Pemerintah <?php echo ucwords(config_item('sebutan_desa'))?></option>
 							<?php foreach($pamong AS $data){?>
-								<option value="<?php echo $data['pamong_nama']?>"><font style="bold"><?php echo unpenetration($data['pamong_nama'])?></font> (<?php echo unpenetration($data['jabatan'])?>)</option>
+								<option value="<?php echo $data['pamong_nama']?>" <?php if($data['pamong_nama']==$_SESSION['post']['pamong']) echo 'selected'?>><font style="bold"><?php echo unpenetration($data['pamong_nama'])?></font> (<?php echo unpenetration($data['jabatan'])?>)</option>
 							<?php }?>
 						</select>
 					</td>
@@ -554,7 +554,7 @@ table.form th.konfirmasi{
 						<select name="jabatan"  class="inputbox required">
 							<option value="">Pilih Jabatan</option>
 							<?php foreach($pamong AS $data){?>
-								<option <?php if($data['jabatan']==$_SESSION['post']['jabatan']) echo 'selected'?>><?php echo unpenetration($data['jabatan'])?></option>
+								<option value="<?php echo $data['jabatan']?>" <?php if($data['jabatan']==$_SESSION['post']['jabatan']) echo 'selected'?>><?php echo unpenetration($data['jabatan'])?></option>
 							<?php }?>
 						</select>
 					</td>

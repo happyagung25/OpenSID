@@ -419,6 +419,10 @@
 				  "Duda",
 				  "Beristri"
 				);
+				$kode['status_kawin_wanita'] = array(
+				  "Gadis",
+				  "Janda"
+				);
 				break;
 			case 'surat_permohonan_kartu_keluarga':
 				$kode['alasan_permohonan'] = array(
@@ -569,7 +573,7 @@
 					$buffer=str_replace("[tempatlahir_pria]",$pria[tempatlahir],$buffer);
 					$buffer=str_replace("[tanggallahir_pria]",$pria[tanggallahir],$buffer);
 					$buffer=str_replace("[usia_pria]","$pria[umur] Tahun",$buffer);
-					$buffer=str_replace("[warga_negara_pria]","$pria[warganegara]",$buffer);
+					$buffer=str_replace("[wn_pria]","$pria[warganegara]",$buffer);
 				}
 
 				# Data orang tua apabila warga desa

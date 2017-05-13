@@ -47,7 +47,10 @@ noResultsText :'Tidak ada no nik yang sesuai..',
 onSelect: function() {
 	$('#id_wanita_copy').val($('#id_wanita_hidden').val());
 	$('#id_wanita_validasi').val($('#id_wanita_hidden').val());
-	$('#'+'main').submit();
+	$('#id_pria_validasi').val($('#id_pria_hidden').val());
+	$('#'+'validasi').attr('action','')
+	$('#'+'validasi').attr('target','')
+	$('#'+'validasi').submit();
 }
 });
 
@@ -65,7 +68,6 @@ width: 260,
 noResultsText :'Tidak ada no nik yang sesuai..',
 onSelect: function() {
 	$('#id_wanita_copy').val($('#id_wanita_hidden').val());
-	// $('#'+'main').submit();
 	$('#id_wanita_validasi').val($('#id_wanita_hidden').val());
 	$('#'+'validasi').attr('action','')
 	$('#'+'validasi').attr('target','')
@@ -159,7 +161,7 @@ table.form th.konfirmasi{
 
 			<form id="validasi" action="<?php echo $form_action?>" method="POST" target="_blank">
 				<input id="nomor" name="nomor" type="hidden" value="<?php echo $_SESSION['post']['nomor']; ?>"/>
-				<input type="hidden" name="id_pria" value="<?php echo $pria['id']?>">
+				<input id="id_pria_validasi" type="hidden" name="id_pria" value="<?php echo $_SESSION['post']['id_pria']?>">
 				<input id="id_wanita_validasi" name="id_wanita" type="hidden" value="<?php echo $_SESSION['post']['id_wanita']?>"/>
 
 				<?php if (empty($pria)) : ?>
@@ -230,29 +232,27 @@ table.form th.konfirmasi{
 				<?php endif; ?>
 
 				<?php if($pria) : ?>
-					<?php if($pria['sex_id']==1) : ?>
+					<tr>
+						<th class="indent">Jika pria, terangkan jejaka, duda atau beristri</th>
+						<td>
+					    <select name="status_kawin_pria">
+					      <option value="">Pilih Status Kawin</option>
+					      <?php  foreach($kode['status_kawin_pria'] as $data){?>
+					        <option value="<?php echo $data?>" <?php if($pria['status_kawin_pria']==$data) echo 'selected';?>><?php echo ucwords($data)?></option>
+					      <?php }?>
+					    </select>
+							<span>(Status kawin: <?php echo $pria['status_kawin']?>)</span>
+						</td>
+					</tr>
+					<?php if($pria['status_kawin']=="KAWIN") : ?>
 						<tr>
-							<th class="indent">Jika pria, terangkan jejaka, duda atau beristri</th>
+							<th class="indent">Jika beristri, berapa istrinya</th>
 							<td>
-						    <select name="status_kawin_pria">
-						      <option value="">Pilih Status Kawin</option>
-						      <?php  foreach($kode['status_kawin_pria'] as $data){?>
-						        <option value="<?php echo $data?>" <?php if($pria['status_kawin_pria']==$data) echo 'selected';?>><?php echo ucwords($data)?></option>
-						      <?php }?>
-						    </select>
-								<span>(Status kawin: <?php echo $pria['status_kawin']?>)</span>
+								<input name="jumlah_istri" type="text" class="inputbox " size="10" value="1"/>
 							</td>
 						</tr>
-						<?php if($pria['status_kawin']=="KAWIN") : ?>
-							<tr>
-								<th class="indent">Jika beristri, berapa istrinya</th>
-								<td>
-									<input name="jumlah_istri" type="text" class="inputbox " size="10" value="1"/>
-								</td>
-							</tr>
-						<?php else:?>
-							<input name="jumlah_istri" type="hidden" value=""/>
-						<?php endif; ?>
+					<?php else:?>
+						<input name="jumlah_istri" type="hidden" value=""/>
 					<?php endif; ?>
 				<?php endif; ?>
 				<?php if ($ayah_pria) : ?>
@@ -483,6 +483,20 @@ table.form th.konfirmasi{
 						}?>
 					</td>
 				</tr>
+				<?php if($wanita) : ?>
+					<tr>
+						<th class="indent">Jika wanita, terangkan gadis atau janda</th>
+						<td>
+					    <select name="status_kawin_wanita">
+					      <option value="">Pilih Status Kawin</option>
+					      <?php  foreach($kode['status_kawin_wanita'] as $data){?>
+					        <option value="<?php echo $data?>" <?php if($wanita['status_kawin_wanita']==$data) echo 'selected';?>><?php echo ucwords($data)?></option>
+					      <?php }?>
+					    </select>
+							<span>(Status kawin: <?php echo $wanita['status_kawin']?>)</span>
+						</td>
+					</tr>
+				<?php endif; ?>
 
 				<?php if (empty($wanita)) : ?>
 					<tr class="wanita_luar_desa">
@@ -491,14 +505,14 @@ table.form th.konfirmasi{
 					<tr class="wanita_luar_desa">
 						<th class="indent">Nama Lengkap</th>
 						<td>
-							<input name="nama_wanita" type="text" class="inputbox" size="30"/>
+							<input name="nama_wanita" type="text" class="inputbox" size="30" value="<?php echo $_SESSION['post']['nama_wanita']?>"/>
 						</td>
 					</tr>
 					<tr class="wanita_luar_desa">
 						<th class="indent">Tempat Tanggal Lahir</th>
 						<td>
-							<input name="tempatlahir_wanita" type="text" class="inputbox" size="30"/>
-							<input name="tanggallahir_wanita" type="text" class="inputbox datepicker" size="20"/>
+							<input name="tempatlahir_wanita" type="text" class="inputbox" size="30" value="<?php echo $_SESSION['post']['tempatlahir_wanita']?>"/>
+							<input name="tanggallahir_wanita" type="text" class="inputbox datepicker" size="20" value="<?php echo $_SESSION['post']['tanggallahir_wanita']?>"/>
 						</td>
 					</tr>
 					<tr class="wanita_luar_desa">
@@ -507,21 +521,21 @@ table.form th.konfirmasi{
 					    <select name="wn_wanita">
 					      <option value="">Pilih warganegara</option>
 					      <?php foreach($warganegara as $data){?>
-					        <option value="<?php echo $data['nama']?>"> <?php echo strtoupper($data['nama'])?></option>
+					        <option value="<?php echo $data['nama']?>" <?php if($data['nama']==$_SESSION['post']['wn_wanita']) echo 'selected'?>> <?php echo strtoupper($data['nama'])?></option>
 					      <?php }?>
 						  </select>
 							<span class="judul_tengah">Agama</span>
 					    <select name="agama_wanita">
 					      <option value="">Pilih Agama</option>
 					      <?php foreach($agama as $data){?>
-					        <option value="<?php echo $data['nama']?>"> <?php echo ucwords($data['nama'])?></option>
+					        <option value="<?php echo $data['nama']?>" <?php if($data['nama']==$_SESSION['post']['agama_wanita']) echo 'selected'?>> <?php echo ucwords($data['nama'])?></option>
 					      <?php }?>
 					    </select>
 							<span class="judul_tengah">Pekerjaan</span>
 					    <select name="pekerjaan_wanita">
 					      <option value="">Pilih Pekerjaan</option>
 					      <?php  foreach($pekerjaan as $data){?>
-					        <option value="<?php echo $data['nama']?>"> <?php echo ucwords($data['nama'])?></option>
+					        <option value="<?php echo $data['nama']?>" <?php if($data['nama']==$_SESSION['post']['pekerjaan_wanita']) echo 'selected'?>> <?php echo ucwords($data['nama'])?></option>
 					      <?php }?>
 					    </select>
 						</td>
@@ -529,13 +543,18 @@ table.form th.konfirmasi{
 					<tr class="wanita_luar_desa">
 						<th class="indent">Tempat Tinggal</th>
 						<td>
-							<input name="alamat_wanita" type="text" class="inputbox" size="40"/>
+							<input name="alamat_wanita" type="text" class="inputbox" size="40" value="<?php echo $_SESSION['post']['alamat_wanita']?>"/>
 						</td>
 					</tr>
 					<tr class="wanita_luar_desa">
-						<th class="indent">Jika pria, terangkan jejaka, duda atau beristri</th>
+						<th class="indent">Jika wanita, terangkan gadis atau janda</th>
 						<td>
-							<input name="status_kawin_wanita" type="text" class="inputbox " size="40"/>
+					    <select name="status_kawin_wanita">
+					      <option value="">Pilih Status Kawin</option>
+					      <?php  foreach($kode['status_kawin_wanita'] as $data){?>
+					        <option value="<?php echo $data?>" <?php if($data['nama']==$_SESSION['post']['status_kawin_wanita']) echo 'selected'?>><?php echo ucwords($data)?></option>
+					      <?php }?>
+					    </select>
 						</td>
 					</tr>
 				<?php endif; ?>

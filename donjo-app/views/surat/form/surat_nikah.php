@@ -118,7 +118,8 @@ table.form th.konfirmasi{
 			<tr>
 				<th>Nomor Surat</th>
 				<td>
-					<input type="text" class="inputbox required" size="12" value="<?php echo $_SESSION['post']['nomor']; ?>" onchange="nomor_surat(this.value);"/> <span>Terakhir: <?php echo $surat_terakhir['no_surat'];?> (tgl: <?php echo $surat_terakhir['tanggal']?>)</span>
+					<input name="input_nomor" type="text" class="inputbox required" size="12" value="<?php echo $_SESSION['post']['nomor']; ?>" onchange="nomor_surat(this.value);"/>
+					<span>Terakhir: <?php echo $surat_terakhir['no_surat'];?> (tgl: <?php echo $surat_terakhir['tanggal']?>)</span>
 				</td>
 			</tr>
 
@@ -157,7 +158,7 @@ table.form th.konfirmasi{
 			</tr>
 
 			<form id="validasi" action="<?php echo $form_action?>" method="POST" target="_blank">
-				<input id="nomor" name="nomor" type="hidden" value=""/>
+				<input id="nomor" name="nomor" type="hidden" value="<?php echo $_SESSION['post']['nomor']; ?>"/>
 				<input type="hidden" name="id_pria" value="<?php echo $pria['id']?>">
 				<input id="id_wanita_validasi" name="id_wanita" type="hidden" value="<?php echo $_SESSION['post']['id_wanita']?>"/>
 

@@ -231,12 +231,15 @@ class Surat extends CI_Controller{
 					$data['ibu_pria'] = $this->surat_model->get_data_ibu($id);
 				}
 				if (isset($data['pria'])) {
-					if ($data['pria']['sex_id']==1) {
-						$data['jenis_pasangan'] = "istri";
-						$data['pria']['status_kawin_pria'] = $status_kawin_pria[$data['pria']['status_kawin']];
-					} else {
-						$data['jenis_pasangan'] = "suami";
-					}
+					$data['pria']['status_kawin_pria'] = $status_kawin_pria[$data['pria']['status_kawin']];
+				}
+				if (isset($_SESSION['id_wanita'])) {
+					$id = $_SESSION['id_wanita'];
+					$data['ayah_wanita'] = $this->surat_model->get_data_ayah($id);
+					$data['ibu_wanita'] = $this->surat_model->get_data_ibu($id);
+				}
+				if (isset($data['wanita'])) {
+					$data['wanita']['status_kawin_wanita'] = $status_kawin_wanita[$data['wanita']['status_kawin']];
 				}
 				break;
 		}

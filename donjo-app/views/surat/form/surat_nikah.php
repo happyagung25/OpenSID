@@ -45,9 +45,11 @@ watermark: <?php if($pria){?>'<?php echo $pria['nik']?> - <?php echo spaceunpene
 width: 260,
 noResultsText :'Tidak ada no nik yang sesuai..',
 onSelect: function() {
-	$('#id_wanita_copy').val($('#id_wanita_hidden').val());
-	$('#id_wanita_validasi').val($('#id_wanita_hidden').val());
+	// $('#id_wanita_copy').val($('#id_wanita_hidden').val());
+	// $('#id_wanita_validasi').val($('#id_wanita_hidden').val());
 	$('#id_pria_validasi').val($('#id_pria_hidden').val());
+	$('input').removeClass('required');
+	$('select').removeClass('required');
 	$('#'+'validasi').attr('action','')
 	$('#'+'validasi').attr('target','')
 	$('#'+'validasi').submit();
@@ -67,8 +69,10 @@ watermark: <?php if($wanita){?>'<?php echo $wanita['nik']?> - <?php echo spaceun
 width: 260,
 noResultsText :'Tidak ada no nik yang sesuai..',
 onSelect: function() {
-	$('#id_wanita_copy').val($('#id_wanita_hidden').val());
+	// $('#id_wanita_copy').val($('#id_wanita_hidden').val());
 	$('#id_wanita_validasi').val($('#id_wanita_hidden').val());
+	$('input').removeClass('required');
+	$('select').removeClass('required');
 	$('#'+'validasi').attr('action','')
 	$('#'+'validasi').attr('target','')
 	$('#'+'validasi').submit();
@@ -266,7 +270,7 @@ table.form th.konfirmasi{
 					<tr>
 						<th class="indent">Tempat Tanggal Lahir</th>
 						<td>
-							<?php echo $ayah_pria['tempatlahir']." / ".tgl_indo_out($ayah['tanggallahir'])?>
+							<?php echo $ayah_pria['tempatlahir']." / ".tgl_indo_out($ayah_pria['tanggallahir'])?>
 						</td>
 					</tr>
 					<tr>
@@ -340,7 +344,7 @@ table.form th.konfirmasi{
 					<tr>
 						<th class="indent">Tempat Tanggal Lahir</th>
 						<td>
-							<?php echo $ibu_pria['tempatlahir']." / ".tgl_indo_out($ibu['tanggallahir'])?>
+							<?php echo $ibu_pria['tempatlahir']." / ".tgl_indo_out($ibu_pria['tanggallahir'])?>
 						</td>
 					</tr>
 					<tr>
@@ -556,6 +560,154 @@ table.form th.konfirmasi{
 					      <?php }?>
 					    </select>
 						</td>
+					</tr>
+				<?php endif; ?>
+
+				<?php if ($ayah_wanita) : ?>
+					<tr>
+						<th colspan="2">DATA AYAH PASANGAN WANITA</th>
+					</tr>
+					<tr>
+						<th class="indent">Nama</th>
+						<td><?php echo $ayah_wanita['nama']?></td>
+					</tr>
+					<tr>
+						<th class="indent">Tempat Tanggal Lahir</th>
+						<td>
+							<?php echo $ayah_wanita['tempatlahir']." / ".tgl_indo_out($ayah_wanita['tanggallahir'])?>
+						</td>
+					</tr>
+					<tr>
+						<th class="indent">Warganegara</th>
+						<td>
+							<?php echo $ayah_wanita['wn']?>
+							<span class="judul_tengah">Agama : </span>
+							<?php echo $ayah_wanita['agama']?>
+							<span class="judul_tengah">Pekerjaan : </span>
+							<?php echo $ayah_wanita['pek']?>
+						</td>
+					</tr>
+					<tr>
+						<th class="indent">Tempat Tinggal</th>
+						<td><?php echo $ayah_wanita['alamat_wilayah']?></td>
+					</tr>
+				<?php else: ?>
+					<tr>
+						<th colspan="2">DATA AYAH PASANGAN WANITA (Isi jika ayah bukan warga <?php echo strtolower(config_item('sebutan_desa'))?> ini)</th>
+					</tr>
+					<tr>
+						<th class="indent">Nama</th>
+						<td><input name="nama_ayah_wanita" type="text" class="inputbox " size="30" value="<?php echo $_SESSION['post']['nama_ayah_wanita']?>" /></td>
+					</tr>
+					<tr>
+						<th class="indent">Tempat Tanggal Lahir</th>
+						<td>
+							<input name="tempatlahir_ayah_wanita" type="text" class="inputbox " size="30" value="<?php echo $_SESSION['post']['tempatlahir_ayah_wanita']?>"/>
+							<input name="tanggallahir_ayah_wanita" type="text" class="inputbox  datepicker" size="20" value="<?php echo $_SESSION['post']['tanggallahir_ayah_wanita']?>"/>
+						</td>
+					</tr>
+					<tr>
+						<th class="indent">Warganegara</th>
+						<td colspan="5">
+					    <select name="wn_ayah_wanita">
+					      <option value="">Pilih warganegara</option>
+					      <?php foreach($warganegara as $data){?>
+					        <option value="<?php echo $data['nama']?>" <?php if($data['nama']==$_SESSION['post']['wn_ayah_wanita']) echo 'selected'?>> <?php echo strtoupper($data['nama'])?></option>
+					      <?php }?>
+						  </select>
+							<span class="judul_tengah">Agama</span>
+					    <select name="agama_ayah_wanita">
+					      <option value="">Pilih Agama</option>
+					      <?php foreach($agama as $data){?>
+					        <option value="<?php echo $data['nama']?>" <?php if($data['nama']==$_SESSION['post']['agama_ayah_wanita']) echo 'selected'?>> <?php echo ucwords($data['nama'])?></option>
+					      <?php }?>
+					    </select>
+							<span class="judul_tengah">Pekerjaan</span>
+					    <select name="pekerjaan_ayah_wanita">
+					      <option value="">Pilih Pekerjaan</option>
+					      <?php  foreach($pekerjaan as $data){?>
+					        <option value="<?php echo $data['nama']?>" <?php if($data['nama']==$_SESSION['post']['pekerjaan_ayah_wanita']) echo 'selected'?>> <?php echo ucwords($data['nama'])?></option>
+					      <?php }?>
+					    </select>
+						</td>
+					</tr>
+					<tr>
+						<th class="indent">Tempat Tinggal</th>
+						<td><input name="alamat_ayah_wanita" type="text" class="inputbox " size="80" value="<?php echo $_SESSION['post']['alamat_ayah_wanita']?>"/></td>
+					</tr>
+				<?php endif; ?>
+
+				<?php if ($ibu_wanita) : ?>
+					<tr>
+						<th colspan="2">DATA IBU PASANGAN WANITA</th>
+					</tr>
+					<tr>
+						<th class="indent">Nama</th>
+						<td><?php echo $ibu_wanita['nama']?></td>
+					</tr>
+					<tr>
+						<th class="indent">Tempat Tanggal Lahir</th>
+						<td>
+							<?php echo $ibu_wanita['tempatlahir']." / ".tgl_indo_out($ibu_wanita['tanggallahir'])?>
+						</td>
+					</tr>
+					<tr>
+						<th class="indent">Warganegara</th>
+						<td>
+							<?php echo $ibu_wanita['wn']?>
+							<span class="judul_tengah">Agama : </span>
+							<?php echo $ibu_wanita['agama']?>
+							<span class="judul_tengah">Pekerjaan : </span>
+							<?php echo $ibu_wanita['pek']?>
+						</td>
+					</tr>
+					<tr>
+						<th class="indent">Tempat Tinggal</th>
+						<td><?php echo $ibu_wanita['alamat_wilayah']?></td>
+					</tr>
+				<?php else: ?>
+					<tr>
+						<th colspan="2">DATA IBU PASANGAN WANITA (Isi jika ibu bukan warga <?php echo strtolower(config_item('sebutan_desa'))?> ini)</th>
+					</tr>
+					<tr>
+						<th class="indent">Nama</th>
+						<td><input name="nama_ibu_wanita" type="text" class="inputbox " size="30" value="<?php echo $_SESSION['post']['nama_ibu_wanita']?>"/></td>
+					</tr>
+					<tr>
+						<th class="indent">Tempat Tanggal Lahir</th>
+						<td>
+							<input name="tempatlahir_ibu_wanita" type="text" class="inputbox " size="30" value="<?php echo $_SESSION['post']['tempatlahir_ibu_wanita']?>"/>
+							<input name="tanggallahir_ibu_wanita" type="text" class="inputbox  datepicker" size="20" value="<?php echo $_SESSION['post']['tanggallahir_ibu_wanita']?>"/>
+						</td>
+					</tr>
+					<tr>
+						<th class="indent">Warganegara</th>
+						<td colspan="5">
+					    <select name="wn_ibu_wanita">
+					      <option value="">Pilih warganegara</option>
+					      <?php foreach($warganegara as $data){?>
+					        <option value="<?php echo $data['nama']?>" <?php if($data['nama']==$_SESSION['post']['wn_ibu_wanita']) echo 'selected'?>> <?php echo strtoupper($data['nama'])?></option>
+					      <?php }?>
+						  </select>
+							<span class="judul_tengah">Agama</span>
+					    <select name="agama_ibu_wanita">
+					      <option value="">Pilih Agama</option>
+					      <?php foreach($agama as $data){?>
+					        <option value="<?php echo $data['nama']?>" <?php if($data['nama']==$_SESSION['post']['agama_ibu_wanita']) echo 'selected'?>> <?php echo ucwords($data['nama'])?></option>
+					      <?php }?>
+					    </select>
+							<span class="judul_tengah">Pekerjaan</span>
+					    <select name="pekerjaan_ibu_wanita">
+					      <option value="">Pilih Pekerjaan</option>
+					      <?php  foreach($pekerjaan as $data){?>
+					        <option value="<?php echo $data['nama']?>" <?php if($data['nama']==$_SESSION['post']['pekerjaan_ibu_wanita']) echo 'selected'?>> <?php echo ucwords($data['nama'])?></option>
+					      <?php }?>
+					    </select>
+						</td>
+					</tr>
+					<tr>
+						<th class="indent">Tempat Tinggal</th>
+						<td><input name="alamat_ibu_wanita" type="text" class="inputbox " size="80" value="<?php echo $_SESSION['post']['alamat_ibu_wanita']?>"/></td>
 					</tr>
 				<?php endif; ?>
 

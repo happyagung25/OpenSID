@@ -884,7 +884,7 @@
 				"tanggallahir_pasangan", "tgl_lahir_ayah", "tgl_lahir_ibu", "tgl_berakhir_paspor",
 				"tgl_akte_perkawinan", "tgl_perceraian", "tanggallahir","tanggallahir_pelapor", "tgl_lahir",
 				"tanggallahir_ayah", "tanggallahir_ibu", "tgl_lahir_wali", "tgl_nikah",
-				"tanggal_pindah"
+				"tanggal_pindah", "tanggal_nikah", "tanggallahir_wali", "tanggallahir_suami_dulu", "tanggallahir_istri_dulu", "tanggallahir_ayah_pria", "tanggallahir_ibu_pria"
 				);
 			foreach ($input as $key => $entry){
 				// Isian tanggal diganti dengan format tanggal standar

@@ -131,7 +131,7 @@ table.form th.konfirmasi{
 
 			<?php $jenis_pasangan = "Istri"; ?>
 			<tr>
-				<th class="grey">CALON PASANGAN PRIA</th>
+				<th class="grey">A. CALON PASANGAN PRIA</th>
 			  <td class="grey">
 			    <div class="uiradio">
 			      <input type="radio" id="calon_pria_1" name="calon_pria" value="1" <?php if(!empty($pria)){echo 'checked';}?> onchange="calon_pria(this.value);">
@@ -143,7 +143,7 @@ table.form th.konfirmasi{
 			</tr>
 
 			<tr class="pria_desa" <?php if (empty($pria)) echo 'style="display: none;"'; ?>>
-				<th colspan="2">DATA CALON PASANGAN PRIA WARGA DESA</th>
+				<th colspan="2">A.1 DATA CALON PASANGAN PRIA WARGA DESA</th>
 			</tr>
 			<tr class="pria_desa" <?php if (empty($pria)) echo 'style="display: none;"'; ?>>
 				<th class="indent">NIK / Nama</th>
@@ -170,7 +170,7 @@ table.form th.konfirmasi{
 
 				<?php if (empty($pria)) : ?>
 					<tr class="pria_luar_desa">
-						<th colspan="2">DATA CALON PASANGAN PRIA LUAR DESA</th>
+						<th colspan="2">A.1 DATA CALON PASANGAN PRIA LUAR DESA</th>
 					</tr>
 					<tr class="pria_luar_desa">
 						<th class="indent">Nama Lengkap</th>
@@ -261,7 +261,7 @@ table.form th.konfirmasi{
 				<?php endif; ?>
 				<?php if ($ayah_pria) : ?>
 					<tr>
-						<th colspan="2">DATA AYAH PASANGAN PRIA</th>
+						<th colspan="2">A.2 DATA AYAH PASANGAN PRIA</th>
 					</tr>
 					<tr>
 						<th class="indent">Nama</th>
@@ -289,7 +289,7 @@ table.form th.konfirmasi{
 					</tr>
 				<?php else: ?>
 					<tr>
-						<th colspan="2">DATA AYAH PASANGAN PRIA (Isi jika ayah bukan warga <?php echo strtolower(config_item('sebutan_desa'))?> ini)</th>
+						<th colspan="2">A.2 DATA AYAH PASANGAN PRIA (Isi jika ayah bukan warga <?php echo strtolower(config_item('sebutan_desa'))?> ini)</th>
 					</tr>
 					<tr>
 						<th class="indent">Nama</th>
@@ -335,7 +335,7 @@ table.form th.konfirmasi{
 
 				<?php if ($ibu_pria) : ?>
 					<tr>
-						<th colspan="2">DATA IBU PASANGAN PRIA</th>
+						<th colspan="2">A.3 DATA IBU PASANGAN PRIA</th>
 					</tr>
 					<tr>
 						<th class="indent">Nama</th>
@@ -363,7 +363,7 @@ table.form th.konfirmasi{
 					</tr>
 				<?php else: ?>
 					<tr>
-						<th colspan="2">DATA IBU PASANGAN PRIA (Isi jika ibu bukan warga <?php echo strtolower(config_item('sebutan_desa'))?> ini)</th>
+						<th colspan="2">A.3 DATA IBU PASANGAN PRIA (Isi jika ibu bukan warga <?php echo strtolower(config_item('sebutan_desa'))?> ini)</th>
 					</tr>
 					<tr>
 						<th class="indent">Nama</th>
@@ -409,7 +409,7 @@ table.form th.konfirmasi{
 
 				<?php if(empty($pria) OR $pria['status_kawin']=="CERAI MATI") : ?>
 					<tr>
-						<th colspan="2">DATA ISTRI TERDAHULU </th>
+						<th colspan="2">A.4 DATA ISTRI TERDAHULU </th>
 					</tr>
 					<tr>
 						<th class="indent">Nama <?php echo ucwords($jenis_pasangan)?> Terdahulu</th>
@@ -464,7 +464,7 @@ table.form th.konfirmasi{
 				<!-- CALON PASANGAN WANITA -->
 				<?php $jenis_pasangan = "Suami"; ?>
 				<tr>
-					<th class="grey">CALON PASANGAN WANITA</th>
+					<th class="grey">B. CALON PASANGAN WANITA</th>
 				  <td class="grey">
 				    <div class="uiradio">
 				      <input type="radio" id="calon_wanita_1" name="calon_wanita" value="1" <?php if(!empty($wanita)){echo 'checked';}?> onchange="calon_wanita_asal(this.value);">
@@ -476,7 +476,7 @@ table.form th.konfirmasi{
 				</tr>
 
 				<tr class="wanita_desa" <?php if (empty($wanita)) echo 'style="display: none;"'; ?>>
-					<th colspan="2">DATA CALON PASANGAN WANITA WARGA DESA</th>
+					<th colspan="2">B.1 DATA CALON PASANGAN WANITA WARGA DESA</th>
 				</tr>
 				<tr class="wanita_desa" <?php if (empty($wanita)) echo 'style="display: none;"'; ?>>
 					<th class="indent">NIK / Nama</th>
@@ -505,7 +505,7 @@ table.form th.konfirmasi{
 
 				<?php if (empty($wanita)) : ?>
 					<tr class="wanita_luar_desa">
-						<th colspan="2">DATA CALON PASANGAN WANITA LUAR DESA</th>
+						<th colspan="2">B.1 DATA CALON PASANGAN WANITA LUAR DESA</th>
 					</tr>
 					<tr class="wanita_luar_desa">
 						<th class="indent">Nama Lengkap</th>
@@ -566,7 +566,7 @@ table.form th.konfirmasi{
 
 				<?php if ($ayah_wanita) : ?>
 					<tr>
-						<th colspan="2">DATA AYAH PASANGAN WANITA</th>
+						<th colspan="2">B.2 DATA AYAH PASANGAN WANITA</th>
 					</tr>
 					<tr>
 						<th class="indent">Nama</th>
@@ -594,7 +594,7 @@ table.form th.konfirmasi{
 					</tr>
 				<?php else: ?>
 					<tr>
-						<th colspan="2">DATA AYAH PASANGAN WANITA (Isi jika ayah bukan warga <?php echo strtolower(config_item('sebutan_desa'))?> ini)</th>
+						<th colspan="2">B.2 DATA AYAH PASANGAN WANITA (Isi jika ayah bukan warga <?php echo strtolower(config_item('sebutan_desa'))?> ini)</th>
 					</tr>
 					<tr>
 						<th class="indent">Nama</th>
@@ -640,7 +640,7 @@ table.form th.konfirmasi{
 
 				<?php if ($ibu_wanita) : ?>
 					<tr>
-						<th colspan="2">DATA IBU PASANGAN WANITA</th>
+						<th colspan="2">B.3 DATA IBU PASANGAN WANITA</th>
 					</tr>
 					<tr>
 						<th class="indent">Nama</th>
@@ -668,7 +668,7 @@ table.form th.konfirmasi{
 					</tr>
 				<?php else: ?>
 					<tr>
-						<th colspan="2">DATA IBU PASANGAN WANITA (Isi jika ibu bukan warga <?php echo strtolower(config_item('sebutan_desa'))?> ini)</th>
+						<th colspan="2">B.3 DATA IBU PASANGAN WANITA (Isi jika ibu bukan warga <?php echo strtolower(config_item('sebutan_desa'))?> ini)</th>
 					</tr>
 					<tr>
 						<th class="indent">Nama</th>
@@ -714,7 +714,7 @@ table.form th.konfirmasi{
 
 				<?php if(empty($wanita) OR $wanita['status_kawin']=="CERAI MATI") : ?>
 					<tr>
-						<th colspan="2">DATA SUAMI TERDAHULU </th>
+						<th colspan="2">B.4 DATA SUAMI TERDAHULU </th>
 					</tr>
 					<tr>
 						<th class="indent">Nama <?php echo ucwords($jenis_pasangan)?> Terdahulu</th>
@@ -767,7 +767,7 @@ table.form th.konfirmasi{
 				<?php endif; ?>
 
 				<tr>
-					<th colspan="2">DATA WALI NIKAH </th>
+					<th colspan="2">B.5 DATA WALI NIKAH </th>
 				</tr>
 				<tr>
 					<th class="indent">Nama Wali Nikah</th>
@@ -816,6 +816,28 @@ table.form th.konfirmasi{
 				<tr>
 					<th class="indent">Hubungan Dengan Wali</th>
 					<td><input name="hub_wali" type="text" class="inputbox " size="80" value="<?php echo $_SESSION['post']['hub_wali']?>"/></td>
+				</tr>
+
+				<tr>
+					<th colspan="2" class="grey">C. DATA PERNIKAHAN</th>
+				</tr>
+				<tr>
+					<th class="indent">Hari, Tanggal, Jam</th>
+						<td><input name="hari_nikah" type="text" class="inputbox required" size="15" value="<?php echo $_SESSION['post']['hari_nikah']?>"/>,
+						<input name="tanggal_nikah" type="text" class="inputbox required datepicker" size="15" value="<?php echo $_SESSION['post']['tanggal_nikah']?>"/>,
+						<input name="jam_nikah" type="text" class="inputbox required" size="10" value="<?php echo $_SESSION['post']['jam_nikah']?>"/></td>
+				</tr>
+				<tr>
+					<th class="indent">Mas Kawin</th>
+					<td><input name="mas_kawin" type="text" class="inputbox required" size="40" value="<?php echo $_SESSION['post']['mas_kawin']?>"/></td>
+				</tr>
+				<tr>
+					<th class="indent">Tunai / Hutang</th>
+					<td><input name="tunai" type="text" class="inputbox required" size="10" value="tunai" value="<?php echo $_SESSION['post']['tunai']?>"/></td>
+				</tr>
+				<tr>
+					<th class="indent">Tempat</th>
+					<td><input name="tempat_nikah" type="text" class="inputbox required" size="40" value="<?php echo $_SESSION['post']['tempat_nikah']?>"/></td>
 				</tr>
 
 				<!-- PERANGKAT DESA -->

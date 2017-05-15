@@ -96,7 +96,7 @@ padding:5px;
 </td>
 </tr>
 <tr>
-<th>Jika wanita, terangkan gadis atau janda</th>
+<th>Jika wanita, terangkan perawan atau janda</th>
 <td>
 <input name="perawan" type="text" class="inputbox " size="40"/>
 </td>

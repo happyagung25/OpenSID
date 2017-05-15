@@ -216,7 +216,7 @@ class Surat extends CI_Controller{
 					"CERAI HIDUP" => "Duda",
 					"CERAI MATI" => "Duda");
 				$status_kawin_wanita = array(
-					"BELUM KAWIN" => "Gadis",
+					"BELUM KAWIN" => "Perawan",
 					"KAWIN" => "Bersuami",
 					"CERAI HIDUP" => "Janda",
 					"CERAI MATI" => "Janda");

@@ -420,7 +420,7 @@
 				  "Beristri"
 				);
 				$kode['status_kawin_wanita'] = array(
-				  "Gadis",
+				  "Perawan",
 				  "Janda"
 				);
 				break;
@@ -571,7 +571,7 @@
 					$buffer=str_replace("[sex_pria]","$pria[sex]",$buffer);
 					$buffer=str_replace("[status_pria]","$pria[status_kawin]",$buffer);
 					$buffer=str_replace("[tempatlahir_pria]",$pria[tempatlahir],$buffer);
-					$buffer=str_replace("[tanggallahir_pria]",$pria[tanggallahir],$buffer);
+					$buffer=str_replace("[tanggallahir_pria]",tgl_indo_dari_str($pria[tanggallahir]),$buffer);
 					$buffer=str_replace("[usia_pria]","$pria[umur] Tahun",$buffer);
 					$buffer=str_replace("[wn_pria]","$pria[warganegara]",$buffer);
 				}
@@ -603,13 +603,13 @@
 					$wanita = $this->get_data_surat($input['id_wanita']);
 					$ibu_wanita = $this->get_data_ibu($input['id_wanita']);
 					$ayah_wanita = $this->get_data_ayah($input['id_wanita']);
-					$buffer=str_replace("[form_agama_wanita]","$wanita[agama]",$buffer);
-					$buffer=str_replace("[form_alamat_wanita]","$wanita[alamat_wilayah]",$buffer);
-					$buffer=str_replace("[form_nama_wanita]","$wanita[nama]",$buffer);
-					$buffer=str_replace("[form_pekerjaan_wanita]","$wanita[pekerjaan]",$buffer);
-					$buffer=str_replace("[form_tempatlahir_wanita]","$wanita[tempatlahir]",$buffer);
-					$buffer=str_replace("[form_tanggallahir_wanita]","$wanita[tanggallahir]",$buffer);
-					$buffer=str_replace("[form_wn_wanita]","$wanita[warganegara]",$buffer);
+					$buffer=str_replace("[form_agama_wanita]",$wanita[agama],$buffer);
+					$buffer=str_replace("[form_alamat_wanita]",$wanita[alamat_wilayah],$buffer);
+					$buffer=str_replace("[form_nama_wanita]",$wanita[nama],$buffer);
+					$buffer=str_replace("[form_pekerjaan_wanita]",$wanita[pekerjaan],$buffer);
+					$buffer=str_replace("[form_tempatlahir_wanita]",$wanita[tempatlahir],$buffer);
+					$buffer=str_replace("[form_tanggallahir_wanita]",tgl_indo_dari_str($wanita[tanggallahir]),$buffer);
+					$buffer=str_replace("[form_wn_wanita]",$wanita[warganegara],$buffer);
 				}
 				# Data orang tua apabila warga desa
 				if ($ayah_wanita) {
@@ -630,6 +630,8 @@
 					$buffer=str_replace("[form_pekerjaan_ibu_wanita]",$ibu_wanita['pek'],$buffer);
 					$buffer=str_replace("[form_alamat_ibu_wanita]","RT $ibu_wanita[rt] / RW $ibu_wanita[rw] $ibu_wanita[dusun] $alamat_desa",$buffer);
 				}
+				// Kode isian yang mungkin tidak terisi
+				$buffer=str_replace("[form_suami_dulu]",$input['suami_dulu'],$buffer);
 
 				break;
 

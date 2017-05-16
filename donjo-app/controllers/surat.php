@@ -121,7 +121,7 @@ class Surat extends CI_Controller{
 				if (!$id) $id = $_POST['id_suami'];
 				if (!$id) $id = $_POST['id_istri'];
 				break;
-			case 'surat_nikah':
+			case 'surat_ket_nikah':
 				// id-nya calon pasangan pria atau wanita
 				if (!$id) $id = $_POST['id_pria'];
 				if (!$id) $id = $_POST['id_wanita'];
@@ -187,7 +187,7 @@ class Surat extends CI_Controller{
 			case 'surat_pernyataan_akta':
 				$data['laki'] = $this->surat_model->list_penduduk_laki();
 				break;
-			case 'surat_nikah':
+			case 'surat_ket_nikah':
 				// Perlu disimpan di SESSION karena belum ketemu cara
 				// memanggil flexbox memakai ajax atau menyimpan data
 				// TODO: cari pengganti flexbox yang sudah tidak di-support lagi

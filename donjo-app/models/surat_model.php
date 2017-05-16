@@ -413,7 +413,7 @@
 	function get_daftar_kode_surat($surat) {
 		$kode = array();
 		switch ($surat) {
-			case 'surat_nikah':
+			case 'surat_ket_nikah':
 				$kode['status_kawin_pria'] = array(
 				  "Jejaka",
 				  "Duda",
@@ -556,7 +556,7 @@
 				$buffer=str_replace("[alamat_suami]","RT $suami[rt] / RW $suami[rw] $suami[dusun]",$buffer);
 				break;
 
-			case 'surat_nikah':
+			case 'surat_ket_nikah':
 				// Data pasangan pria =====================
 				if($input['id_pria']) {
 					$pria = $this->get_data_surat($input['id_pria']);

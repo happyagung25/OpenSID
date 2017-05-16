@@ -11,6 +11,7 @@
 			$('.wanita_luar_desa').show();
 			$('#id_wanita_copy').val('');
 			$('#'+'main').submit();
+			submit_form_ambil_data();
 		}
 	}
 	function calon_pria(asal){
@@ -23,12 +24,19 @@
 			$('.pria_luar_desa').show();
 			$('#id_wanita_copy').val($('#id_wanita_hidden').val());
 			$('#id_wanita_validasi').val($('#id_wanita_hidden').val());
-			$('#'+'main').submit();
+			submit_form_ambil_data();
 		}
 	}
 	function nomor_surat(nomor){
 		$('#nomor').val(nomor);
 		$('#nomor_main').val(nomor);
+	}
+	function submit_form_ambil_data(){
+		$('input').removeClass('required');
+		$('select').removeClass('required');
+		$('#'+'validasi').attr('action','')
+		$('#'+'validasi').attr('target','')
+		$('#'+'validasi').submit();
 	}
 
 $(function(){
@@ -48,11 +56,7 @@ onSelect: function() {
 	// $('#id_wanita_copy').val($('#id_wanita_hidden').val());
 	// $('#id_wanita_validasi').val($('#id_wanita_hidden').val());
 	$('#id_pria_validasi').val($('#id_pria_hidden').val());
-	$('input').removeClass('required');
-	$('select').removeClass('required');
-	$('#'+'validasi').attr('action','')
-	$('#'+'validasi').attr('target','')
-	$('#'+'validasi').submit();
+	submit_form_ambil_data();
 }
 });
 
@@ -116,7 +120,7 @@ table.form th.konfirmasi{
 <div class="content-header"></div>
 <div id="contentpane">
 	<div class="ui-layout-north panel">
-		<h3>Surat Keterangan Untuk Nikah Pria</h3>
+		<h3>Surat Keterangan Untuk Nikah</h3>
 	</div>
 
 	<div class="ui-layout-center" id="maincontent" style="padding: 5px;">

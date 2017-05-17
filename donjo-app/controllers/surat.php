@@ -193,22 +193,34 @@ class Surat extends CI_Controller{
 				// TODO: cari pengganti flexbox yang sudah tidak di-support lagi
 				$_SESSION['post'] = $_POST;
 				if($this->input->post('calon_pria')==2) unset($_SESSION['id_pria']);
-				if($_POST['id_pria'] != ''){
+				if($_POST['id_pria'] != '' AND $_POST['id_pria'] !='*'){
 					$data['pria']=$this->surat_model->get_penduduk($_POST['id_pria']);
 					$_SESSION['id_pria'] = $_POST['id_pria'];
-				}elseif (isset($_SESSION['id_pria'])){
+				}elseif ($_POST['id_pria'] !='*' AND isset($_SESSION['id_pria'])){
 					$data['pria']=$this->surat_model->get_penduduk($_SESSION['id_pria']);
 				}else{
 					unset($data['pria']);
+					unset($_SESSION['id_pria']);
 				}
 				if($this->input->post('calon_wanita')==2) unset($_SESSION['id_wanita']);
-				if($_POST['id_wanita'] != ''){
+				if($_POST['id_wanita'] != '' AND $_POST['id_wanita'] !='*'){
 					$data['wanita']=$this->surat_model->get_penduduk($_POST['id_wanita']);
 					$_SESSION['id_wanita'] = $_POST['id_wanita'];
-				}elseif (isset($_SESSION['id_wanita'])){
+				}elseif ($_POST['id_wanita'] !='*' AND isset($_SESSION['id_wanita'])){
 					$data['wanita']=$this->surat_model->get_penduduk($_SESSION['id_wanita']);
 				}else{
 					unset($data['wanita']);
+					unset($_SESSION['id_wanita']);
+				}
+				if($_POST['id_wanita'] =='*'){
+					unset($_SESSION['post']['nama_wali']);
+					unset($_SESSION['post']['bin_wali']);
+					unset($_SESSION['post']['tempatlahir_wali']);
+					unset($_SESSION['post']['tanggallahir_wali']);
+					unset($_SESSION['post']['wn_wali']);
+					unset($_SESSION['post']['pek_wali']);
+					unset($_SESSION['post']['alamat_wali']);
+					unset($_SESSION['post']['hub_wali']);
 				}
 				$status_kawin_pria = array(
 					"BELUM KAWIN" => "Jejaka",

@@ -53,6 +53,11 @@ watermark: <?php if($pria){?>'<?php echo $pria['nik']?> - <?php echo spaceunpene
 width: 260,
 noResultsText :'Tidak ada no nik yang sesuai..',
 onSelect: function() {
+	// Hapus isian ayah, ibu jika ganti calon pria
+	if($('#id_pria_hidden').val() != $('#id_pria_validasi').val()){
+		$('.ibu_pria').val('');
+		$('.ayah_pria').val('');
+	};
 	// $('#id_wanita_copy').val($('#id_wanita_hidden').val());
 	// $('#id_wanita_validasi').val($('#id_wanita_hidden').val());
 	$('#id_pria_validasi').val($('#id_pria_hidden').val());
@@ -303,33 +308,33 @@ table.form th.konfirmasi{
 					</tr>
 					<tr>
 						<th class="indent">Nama</th>
-						<td><input name="nama_ayah_pria" type="text" class="inputbox " size="30" value="<?php echo $_SESSION['post']['nama_ayah_pria']?>" /></td>
+						<td><input name="nama_ayah_pria" type="text" class="ayah_pria inputbox " size="30" value="<?php echo $_SESSION['post']['nama_ayah_pria']?>" /></td>
 					</tr>
 					<tr>
 						<th class="indent">Tempat Tanggal Lahir</th>
 						<td>
-							<input name="tempatlahir_ayah_pria" type="text" class="inputbox " size="30" value="<?php echo $_SESSION['post']['tempatlahir_ayah_pria']?>"/>
-							<input name="tanggallahir_ayah_pria" type="text" class="inputbox  datepicker" size="20" value="<?php echo $_SESSION['post']['tanggallahir_ayah_pria']?>"/>
+							<input name="tempatlahir_ayah_pria" type="text" class="ayah_pria inputbox " size="30" value="<?php echo $_SESSION['post']['tempatlahir_ayah_pria']?>"/>
+							<input name="tanggallahir_ayah_pria" type="text" class="ayah_pria inputbox datepicker" size="20" value="<?php echo $_SESSION['post']['tanggallahir_ayah_pria']?>"/>
 						</td>
 					</tr>
 					<tr>
 						<th class="indent">Warganegara</th>
 						<td colspan="5">
-					    <select name="wn_ayah_pria">
+					    <select name="wn_ayah_pria" class="ayah_pria">
 					      <option value="">Pilih warganegara</option>
 					      <?php foreach($warganegara as $data){?>
 					        <option value="<?php echo $data['nama']?>" <?php if($data['nama']==$_SESSION['post']['wn_ayah_pria']) echo 'selected'?>> <?php echo strtoupper($data['nama'])?></option>
 					      <?php }?>
 						  </select>
 							<span class="judul_tengah">Agama</span>
-					    <select name="agama_ayah_pria">
+					    <select name="agama_ayah_pria" class="ayah_pria">
 					      <option value="">Pilih Agama</option>
 					      <?php foreach($agama as $data){?>
 					        <option value="<?php echo $data['nama']?>" <?php if($data['nama']==$_SESSION['post']['agama_ayah_pria']) echo 'selected'?>> <?php echo ucwords($data['nama'])?></option>
 					      <?php }?>
 					    </select>
 							<span class="judul_tengah">Pekerjaan</span>
-					    <select name="pekerjaan_ayah_pria">
+					    <select name="pekerjaan_ayah_pria" class="ayah_pria">
 					      <option value="">Pilih Pekerjaan</option>
 					      <?php  foreach($pekerjaan as $data){?>
 					        <option value="<?php echo $data['nama']?>" <?php if($data['nama']==$_SESSION['post']['pekerjaan_ayah_pria']) echo 'selected'?>> <?php echo ucwords($data['nama'])?></option>
@@ -339,7 +344,7 @@ table.form th.konfirmasi{
 					</tr>
 					<tr>
 						<th class="indent">Tempat Tinggal</th>
-						<td><input name="alamat_ayah_pria" type="text" class="inputbox " size="80" value="<?php echo $_SESSION['post']['alamat_ayah_pria']?>"/></td>
+						<td><input name="alamat_ayah_pria" type="text" class="ayah_pria inputbox " size="80" value="<?php echo $_SESSION['post']['alamat_ayah_pria']?>"/></td>
 					</tr>
 				<?php endif; ?>
 
@@ -377,33 +382,33 @@ table.form th.konfirmasi{
 					</tr>
 					<tr>
 						<th class="indent">Nama</th>
-						<td><input name="nama_ibu_pria" type="text" class="inputbox " size="30" value="<?php echo $_SESSION['post']['nama_ibu_pria']?>"/></td>
+						<td><input name="nama_ibu_pria" type="text" class="ibu_pria inputbox " size="30" value="<?php echo $_SESSION['post']['nama_ibu_pria']?>"/></td>
 					</tr>
 					<tr>
 						<th class="indent">Tempat Tanggal Lahir</th>
 						<td>
-							<input name="tempatlahir_ibu_pria" type="text" class="inputbox " size="30" value="<?php echo $_SESSION['post']['tempatlahir_ibu_pria']?>"/>
-							<input name="tanggallahir_ibu_pria" type="text" class="inputbox  datepicker" size="20" value="<?php echo $_SESSION['post']['tanggallahir_ibu_pria']?>"/>
+							<input name="tempatlahir_ibu_pria" type="text" class="ibu_pria inputbox " size="30" value="<?php echo $_SESSION['post']['tempatlahir_ibu_pria']?>"/>
+							<input name="tanggallahir_ibu_pria" type="text" class="ibu_pria inputbox  datepicker" size="20" value="<?php echo $_SESSION['post']['tanggallahir_ibu_pria']?>"/>
 						</td>
 					</tr>
 					<tr>
 						<th class="indent">Warganegara</th>
 						<td colspan="5">
-					    <select name="wn_ibu_pria">
+					    <select name="wn_ibu_pria" class="ibu_pria">
 					      <option value="">Pilih warganegara</option>
 					      <?php foreach($warganegara as $data){?>
 					        <option value="<?php echo $data['nama']?>" <?php if($data['nama']==$_SESSION['post']['wn_ibu_pria']) echo 'selected'?>> <?php echo strtoupper($data['nama'])?></option>
 					      <?php }?>
 						  </select>
 							<span class="judul_tengah">Agama</span>
-					    <select name="agama_ibu_pria">
+					    <select name="agama_ibu_pria" class="ibu_pria">
 					      <option value="">Pilih Agama</option>
 					      <?php foreach($agama as $data){?>
 					        <option value="<?php echo $data['nama']?>" <?php if($data['nama']==$_SESSION['post']['agama_ibu_pria']) echo 'selected'?>> <?php echo ucwords($data['nama'])?></option>
 					      <?php }?>
 					    </select>
 							<span class="judul_tengah">Pekerjaan</span>
-					    <select name="pekerjaan_ibu_pria">
+					    <select name="pekerjaan_ibu_pria" class="ibu_pria">
 					      <option value="">Pilih Pekerjaan</option>
 					      <?php  foreach($pekerjaan as $data){?>
 					        <option value="<?php echo $data['nama']?>" <?php if($data['nama']==$_SESSION['post']['pekerjaan_ibu_pria']) echo 'selected'?>> <?php echo ucwords($data['nama'])?></option>
@@ -413,7 +418,7 @@ table.form th.konfirmasi{
 					</tr>
 					<tr>
 						<th class="indent">Tempat Tinggal</th>
-						<td><input name="alamat_ibu_pria" type="text" class="inputbox " size="80" value="<?php echo $_SESSION['post']['alamat_ibu_pria']?>"/></td>
+						<td><input name="alamat_ibu_pria" type="text" class="ibu_pria inputbox " size="80" value="<?php echo $_SESSION['post']['alamat_ibu_pria']?>"/></td>
 					</tr>
 				<?php endif; ?>
 

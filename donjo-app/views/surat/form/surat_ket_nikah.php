@@ -38,6 +38,15 @@
 		$('#'+'validasi').attr('target','')
 		$('#'+'validasi').submit();
 	}
+	function submit_form_doc(){
+		if(($('#id_pria_validasi').val()=='' || $('#id_pria_validasi').val()=='*') && ($('#id_wanita_validasi').val()=='' || $('#id_wanita_validasi').val()=='*')){
+			$('#dialog').show();
+			$('#dialog').dialog();
+			return;
+		}
+		$('#'+'validasi').attr('action','<?php echo $form_action2?>');
+		$('#'+'validasi').submit();
+	}
 
 $(function(){
 var pria = {};
@@ -136,6 +145,9 @@ table.form th.konfirmasi{
 		<h3>Surat Keterangan Untuk Nikah</h3>
 	</div>
 
+	<div id="dialog" title="Perhatian" style="display: none;">
+	  <p>Salah satu calon pasangan, pria atau wanita, harus warga desa.</p>
+	</div>
 	<div class="ui-layout-center" id="maincontent" style="padding: 5px;">
 		<table class="form">
 			<tr>
@@ -182,8 +194,8 @@ table.form th.konfirmasi{
 
 			<form id="validasi" action="<?php echo $form_action?>" method="POST" target="_blank">
 				<input id="nomor" name="nomor" type="hidden" value="<?php echo $_SESSION['post']['nomor']; ?>"/>
-				<input id="id_pria_validasi" type="hidden" name="id_pria" value="<?php echo $_SESSION['post']['id_pria']?>">
-				<input id="id_wanita_validasi" name="id_wanita" type="hidden" value="<?php echo $_SESSION['post']['id_wanita']?>"/>
+				<input id="id_pria_validasi" type="hidden" name="id_pria" value="<?php echo $_SESSION['id_pria']?>">
+				<input id="id_wanita_validasi" name="id_wanita" type="hidden" value="<?php echo $_SESSION['id_wanita']?>"/>
 
 				<?php if (empty($pria)) : ?>
 					<tr class="pria_luar_desa">
@@ -821,7 +833,7 @@ table.form th.konfirmasi{
 				    <select id="pek_wali" name="pek_wali" class="wali">
 				      <option value="">Pilih Pekerjaan</option>
 				      <?php  foreach($pekerjaan as $data){?>
-				        <option value="<?php echo $data['pekerjaan']?>" <?php if($data['nama']==(($ayah_wanita) ? $ayah_wanita['pek'] : $_SESSION['post']['pek_wali'])) echo 'selected'?>> <?php echo ucwords($data['nama'])?></option>
+				        <option value="<?php echo $data['nama']?>" <?php if($data['nama']==(($ayah_wanita) ? $ayah_wanita['pek'] : $_SESSION['post']['pek_wali'])) echo 'selected'?>> <?php echo ucwords($data['nama'])?></option>
 				      <?php }?>
 				    </select>
 					</td>
@@ -832,7 +844,7 @@ table.form th.konfirmasi{
 				</tr>
 				<tr>
 					<th class="indent">Hubungan Dengan Wali</th>
-					<td><input id="hub_wali" name="hub_wali" type="text" class="wali inputbox " size="80" value="<?php echo $_SESSION['post']['hub_wali']?>"/></td>
+					<td><input id="hub_wali" name="hub_wali" type="text" class="wali inputbox " size="80" value="<?php echo ($ayah_wanita) ? 'Ayah' : $_SESSION['post']['hub_wali']?>"/></td>
 				</tr>
 
 				<tr>
@@ -896,7 +908,7 @@ table.form th.konfirmasi{
 						<button type="button" onclick="$('#'+'validasi').attr('action','<?php echo $form_action?>');$('#'+'validasi').submit();" class="uibutton special"><span class="ui-icon ui-icon-print">&nbsp;</span>Cetak</button>
 					<?php } ?>
 					<?php if (SuratExport($url)) { ?>
-						<button type="button" onclick="$('#'+'validasi').attr('action','<?php echo $form_action2?>');$('#'+'validasi').submit();" class="uibutton confirm"><span class="ui-icon ui-icon-document">&nbsp;</span>Export Doc</button>
+						<button type="button" onclick="submit_form_doc();" class="uibutton confirm"><span class="ui-icon ui-icon-document">&nbsp;</span>Export Doc</button>
 					<?php } ?>
         </div>
     </div>

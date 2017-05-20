@@ -801,16 +801,16 @@ table.form th.konfirmasi{
 				<tr>
 					<th class="indent">Nama Wali Nikah</th>
 					<td>
-						<input id="nama_wali" name="nama_wali" type="text" class="wali inputbox " size="40" value="<?php echo ($ayah_wanita) ? $ayah_wanita['nama'] : $_SESSION['post']['nama_wali']?>"/>
+						<input id="nama_wali" name="nama_wali" type="text" class="wali inputbox " size="40" value="<?php echo ($ayah_wanita AND $calon_wanita_berbeda) ? $ayah_wanita['nama'] : $_SESSION['post']['nama_wali']?>"/>
 						<span class="judul_tengah">Bin :</span>
-						<input id="bin_wali" name="bin_wali" type="text" class="wali inputbox " size="40" value="<?php echo ($ayah_wanita) ? $ayah_wanita['nama_ayah'] : $_SESSION['post']['bin_wali']?>"/>
+						<input id="bin_wali" name="bin_wali" type="text" class="wali inputbox " size="40" value="<?php echo ($ayah_wanita AND $calon_wanita_berbeda) ? $ayah_wanita['nama_ayah'] : $_SESSION['post']['bin_wali']?>"/>
 					</td>
 				</tr>
 				<tr>
 					<th class="indent">Tempat Tanggal Lahir</th>
 					<td>
-						<input id="tempatlahir_wali" name="tempatlahir_wali" type="text" class="wali inputbox " size="30" value="<?php echo ($ayah_wanita) ? $ayah_wanita['tempatlahir'] : $_SESSION['post']['tempatlahir_wali']?>"/>
-						<input id="tanggallahir_wali" name="tanggallahir_wali" type="text" class="wali inputbox datepicker" size="20" value="<?php echo ($ayah_wanita) ? $ayah_wanita['tanggallahir'] : $_SESSION['post']['tanggallahir_wali']?>"/>
+						<input id="tempatlahir_wali" name="tempatlahir_wali" type="text" class="wali inputbox " size="30" value="<?php echo ($ayah_wanita AND $calon_wanita_berbeda) ? $ayah_wanita['tempatlahir'] : $_SESSION['post']['tempatlahir_wali']?>"/>
+						<input id="tanggallahir_wali" name="tanggallahir_wali" type="text" class="wali inputbox datepicker" size="20" value="<?php echo ($ayah_wanita AND $calon_wanita_berbeda) ? $ayah_wanita['tanggallahir'] : $_SESSION['post']['tanggallahir_wali']?>"/>
 					</td>
 				</tr>
 				<tr>
@@ -819,32 +819,32 @@ table.form th.konfirmasi{
 				    <select id="wn_wali" name="wn_wali" class="wali">
 				      <option value="">Pilih warganegara</option>
 				      <?php foreach($warganegara as $data){?>
-				        <option value="<?php echo $data['nama']?>" <?php if($data['nama']==(($ayah_wanita) ? $ayah_wanita['wn'] : $_SESSION['post']['wn_wali'])) echo 'selected'?>> <?php echo strtoupper($data['nama'])?></option>
+				        <option value="<?php echo $data['nama']?>" <?php if($data['nama']==(($ayah_wanita AND $calon_wanita_berbeda) ? $ayah_wanita['wn'] : $_SESSION['post']['wn_wali'])) echo 'selected'?>> <?php echo strtoupper($data['nama'])?></option>
 				      <?php }?>
 					  </select>
 						<span class="judul_tengah">Agama</span>
 				    <select id="agama_wali" name="agama_wali" class="wali">
 				      <option value="">Pilih Agama</option>
 				      <?php foreach($agama as $data){?>
-				        <option value="<?php echo $data['nama']?>" <?php if($data['nama']==(($ayah_wanita) ? $ayah_wanita['agama'] : $_SESSION['post']['agama_wali'])) echo 'selected'?>> <?php echo ucwords($data['nama'])?></option>
+				        <option value="<?php echo $data['nama']?>" <?php if($data['nama']==(($ayah_wanita AND $calon_wanita_berbeda) ? $ayah_wanita['agama'] : $_SESSION['post']['agama_wali'])) echo 'selected'?>> <?php echo ucwords($data['nama'])?></option>
 				      <?php }?>
 				    </select>
 						<span class="judul_tengah">Pekerjaan</span>
 				    <select id="pek_wali" name="pek_wali" class="wali">
 				      <option value="">Pilih Pekerjaan</option>
 				      <?php  foreach($pekerjaan as $data){?>
-				        <option value="<?php echo $data['nama']?>" <?php if($data['nama']==(($ayah_wanita) ? $ayah_wanita['pek'] : $_SESSION['post']['pek_wali'])) echo 'selected'?>> <?php echo ucwords($data['nama'])?></option>
+				        <option value="<?php echo $data['nama']?>" <?php if($data['nama']==(($ayah_wanita AND $calon_wanita_berbeda) ? $ayah_wanita['pek'] : $_SESSION['post']['pek_wali'])) echo 'selected'?>> <?php echo ucwords($data['nama'])?></option>
 				      <?php }?>
 				    </select>
 					</td>
 				</tr>
 				<tr>
 					<th class="indent">Tempat Tinggal</th>
-					<td><input id="alamat_wali" name="alamat_wali" type="text" class="wali inputbox " size="80" value="<?php echo ($ayah_wanita) ? $ayah_wanita['alamat_wilayah'] : $_SESSION['post']['alamat_wali']?>"/></td>
+					<td><input id="alamat_wali" name="alamat_wali" type="text" class="wali inputbox " size="80" value="<?php echo ($ayah_wanita AND $calon_wanita_berbeda) ? $ayah_wanita['alamat_wilayah'] : $_SESSION['post']['alamat_wali']?>"/></td>
 				</tr>
 				<tr>
 					<th class="indent">Hubungan Dengan Wali</th>
-					<td><input id="hub_wali" name="hub_wali" type="text" class="wali inputbox " size="80" value="<?php echo ($ayah_wanita) ? 'Ayah' : $_SESSION['post']['hub_wali']?>"/></td>
+					<td><input id="hub_wali" name="hub_wali" type="text" class="wali inputbox " size="80" value="<?php echo ($ayah_wanita AND $calon_wanita_berbeda) ? 'Ayah' : $_SESSION['post']['hub_wali']?>"/></td>
 				</tr>
 
 				<tr>

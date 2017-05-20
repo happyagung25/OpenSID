@@ -202,8 +202,11 @@ class Surat extends CI_Controller{
 					unset($data['pria']);
 					unset($_SESSION['id_pria']);
 				}
+				$data['calon_wanita_berbeda'] = true;
 				if($this->input->post('calon_wanita')==2) unset($_SESSION['id_wanita']);
 				if($_POST['id_wanita'] != '' AND $_POST['id_wanita'] !='*'){
+					if($_POST['id_wanita'] == $_SESSION['id_wanita'])
+						$data['calon_wanita_berbeda'] = false;
 					$data['wanita']=$this->surat_model->get_penduduk($_POST['id_wanita']);
 					$_SESSION['id_wanita'] = $_POST['id_wanita'];
 				}elseif ($_POST['id_wanita'] !='*' AND isset($_SESSION['id_wanita'])){

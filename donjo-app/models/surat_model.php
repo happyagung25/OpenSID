@@ -579,21 +579,21 @@
 				# Data orang tua apabila warga desa
 				if ($ayah_pria) {
 					$buffer=str_replace("[form_nama_ayah_pria]",$ayah_pria['nama'],$buffer);
-					$buffer=str_replace("[form_tempatlahir_ayah_pria]",$ayah_pria['tempatlahir'],$buffer);
+					$buffer=str_replace("[form_tempatlahir_ayah_pria]",ucwords(strtolower($ayah_pria['tempatlahir'])),$buffer);
 					$buffer=str_replace("[form_tanggallahir_ayah_pria]",tgl_indo_dari_str($ayah_pria['tanggallahir']),$buffer);
 					$buffer=str_replace("[form_wn_ayah_pria]",$ayah_pria['wn'],$buffer);
-					$buffer=str_replace("[form_agama_ayah_pria]",$ayah_pria['agama'],$buffer);
-					$buffer=str_replace("[form_pekerjaan_ayah_pria]",$ayah_pria['pek'],$buffer);
-					$buffer=str_replace("[form_alamat_ayah_pria]","RT $ayah_pria[rt] / RW $ayah_pria[rw] $ayah_pria[dusun] $alamat_desa",$buffer);
+					$buffer=str_replace("[form_agama_ayah_pria]",ucwords(strtolower($ayah_pria['agama'])),$buffer);
+					$buffer=str_replace("[form_pekerjaan_ayah_pria]",ucwords(strtolower($ayah_pria['pek'])),$buffer);
+					$buffer=str_replace("[form_alamat_ayah_pria]","RT ".$ayah_pria[rt]." / RW ".$ayah_pria[rw]." ".ucwords(strtolower($ayah_pria[dusun]))." $alamat_desa",$buffer);
 				}
 				if ($ibu_pria) {
 					$buffer=str_replace("[form_nama_ibu_pria]",$ibu_pria['nama'],$buffer);
-					$buffer=str_replace("[form_tempatlahir_ibu_pria]",$ibu_pria['tempatlahir'],$buffer);
+					$buffer=str_replace("[form_tempatlahir_ibu_pria]",ucwords(strtolower($ibu_pria['tempatlahir'])),$buffer);
 					$buffer=str_replace("[form_tanggallahir_ibu_pria]",tgl_indo_dari_str($ibu_pria['tanggallahir']),$buffer);
 					$buffer=str_replace("[form_wn_ibu_pria]",$ibu_pria['wn'],$buffer);
-					$buffer=str_replace("[form_agama_ibu_pria]",$ibu_pria['agama'],$buffer);
-					$buffer=str_replace("[form_pekerjaan_ibu_pria]",$ibu_pria['pek'],$buffer);
-					$buffer=str_replace("[form_alamat_ibu_pria]","RT $ibu_pria[rt] / RW $ibu_pria[rw] $ibu_pria[dusun] $alamat_desa",$buffer);
+					$buffer=str_replace("[form_agama_ibu_pria]",ucwords(strtolower($ibu_pria['agama'])),$buffer);
+					$buffer=str_replace("[form_pekerjaan_ibu_pria]",ucwords(strtolower($ibu_pria['pek'])),$buffer);
+					$buffer=str_replace("[form_alamat_ibu_pria]","RT $ibu_pria[rt] / RW $ibu_pria[rw] ".ucwords(strtolower($ibu_pria[dusun]))." $alamat_desa",$buffer);
 				}
 				// Kode isian yang mungkin tidak terisi
 				$buffer=str_replace("[form_istri_dulu]",$input['istri_dulu'],$buffer);
@@ -614,21 +614,21 @@
 				# Data orang tua apabila warga desa
 				if ($ayah_wanita) {
 					$buffer=str_replace("[form_nama_ayah_wanita]",$ayah_wanita['nama'],$buffer);
-					$buffer=str_replace("[form_tempatlahir_ayah_wanita]",$ayah_wanita['tempatlahir'],$buffer);
+					$buffer=str_replace("[form_tempatlahir_ayah_wanita]",ucwords(strtolower($ayah_wanita['tempatlahir'])),$buffer);
 					$buffer=str_replace("[form_tanggallahir_ayah_wanita]",tgl_indo_dari_str($ayah_wanita['tanggallahir']),$buffer);
 					$buffer=str_replace("[form_wn_ayah_wanita]",$ayah_wanita['wn'],$buffer);
-					$buffer=str_replace("[form_agama_ayah_wanita]",$ayah_wanita['agama'],$buffer);
-					$buffer=str_replace("[form_pekerjaan_ayah_wanita]",$ayah_wanita['pek'],$buffer);
-					$buffer=str_replace("[form_alamat_ayah_wanita]","RT $ayah_wanita[rt] / RW $ayah_wanita[rw] $ayah_pria[dusun] $alamat_desa",$buffer);
+					$buffer=str_replace("[form_agama_ayah_wanita]",ucwords(strtolower($ayah_wanita['agama'])),$buffer);
+					$buffer=str_replace("[form_pekerjaan_ayah_wanita]",ucwords(strtolower($ayah_wanita['pek'])),$buffer);
+					$buffer=str_replace("[form_alamat_ayah_wanita]","RT $ayah_wanita[rt] / RW $ayah_wanita[rw] ".ucwords(strtolower($ayah_pria[dusun]))." $alamat_desa",$buffer);
 				}
 				if ($ibu_wanita) {
 					$buffer=str_replace("[form_nama_ibu_wanita]",$ibu_wanita['nama'],$buffer);
-					$buffer=str_replace("[form_tempatlahir_ibu_wanita]",$ibu_wanita['tempatlahir'],$buffer);
+					$buffer=str_replace("[form_tempatlahir_ibu_wanita]",ucwords(strtolower($ibu_wanita['tempatlahir'])),$buffer);
 					$buffer=str_replace("[form_tanggallahir_ibu_wanita]",tgl_indo_dari_str($ibu_wanita['tanggallahir']),$buffer);
 					$buffer=str_replace("[form_wn_ibu_wanita]",$ibu_wanita['wn'],$buffer);
-					$buffer=str_replace("[form_agama_ibu_wanita]",$ibu_wanita['agama'],$buffer);
-					$buffer=str_replace("[form_pekerjaan_ibu_wanita]",$ibu_wanita['pek'],$buffer);
-					$buffer=str_replace("[form_alamat_ibu_wanita]","RT $ibu_wanita[rt] / RW $ibu_wanita[rw] $ibu_wanita[dusun] $alamat_desa",$buffer);
+					$buffer=str_replace("[form_agama_ibu_wanita]",ucwords(strtolower($ibu_wanita['agama'])),$buffer);
+					$buffer=str_replace("[form_pekerjaan_ibu_wanita]",ucwords(strtolower($ibu_wanita['pek'])),$buffer);
+					$buffer=str_replace("[form_alamat_ibu_wanita]","RT $ibu_wanita[rt] / RW $ibu_wanita[rw] ".ucwords(strtolower($ibu_wanita[dusun]))." $alamat_desa",$buffer);
 				}
 				// Kode isian yang mungkin tidak terisi
 				$buffer=str_replace("[form_suami_dulu]",$input['suami_dulu'],$buffer);

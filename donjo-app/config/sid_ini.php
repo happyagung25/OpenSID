@@ -7,6 +7,13 @@
 |--------------------------------------------------------------------------
 */
 
+/*
+|--------------------------------------------------------------------------
+| Ambil setting konfigurasi dari database
+|--------------------------------------------------------------------------
+*/
+$config["useDatabaseConfig"] = true;
+
 // Ambil setting SID khusus desa
 define("LOKASI_SID_INI", 'desa/config/');
 // Konfigurasi default

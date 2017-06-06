@@ -21,6 +21,32 @@
 		$this->db->db_debug = $db_debug; //restore setting
   }
 
+  function reset_setting_aplikasi() {
+    $this->db->truncate('setting_aplikasi');
+    $query = "
+      INSERT INTO setting_aplikasi (`id`, `key`, `value`) VALUES
+      (1, 'sebutan_kabupaten', 'kabupaten'),
+      (2, 'sebutan_kabupaten_singkat', 'kab.'),
+      (3, 'sebutan_kecamatan', 'kecamatan'),
+      (4, 'sebutan_kecamatan_singkat', 'kec.'),
+      (5, 'sebutan_desa', 'desa'),
+      (6, 'sebutan_dusun', 'dusun'),
+      (7, 'sebutan_camat', 'camat'),
+      (8, 'website_title', 'Website Resmi'),
+      (9, 'login_title', 'OpenSID'),
+      (10, 'admin_title', 'Sistem Informasi Desa'),
+      (11, 'web_theme', 'default'),
+      (12, 'offline_mode', FALSE),
+      (13, 'enable_track', TRUE),
+      (14, 'dev_tracker_ip', ''),
+      (15, 'nomor_terakhir_semua_surat', FALSE)
+    ";
+    $this->db->query($query);
+
+
+
+  }
+
   function migrasi_db_cri() {
     $this->migrasi_cri_lama();
     $this->migrasi_03_ke_04();
@@ -45,6 +71,23 @@
     $this->migrasi_114_ke_115();
     $this->migrasi_115_ke_116();
     $this->migrasi_116_ke_117();
+    $this->migrasi_117_ke_20();
+  }
+
+  function migrasi_117_ke_20(){
+    if (!$this->db->table_exists('setting_aplikasi') ) {
+      $query = "
+        CREATE TABLE `setting_aplikasi` (
+          `id` int NOT NULL AUTO_INCREMENT,
+          `key` varchar(50),
+          `value` varchar(200),
+          PRIMARY KEY  (`id`)
+        );
+      ";
+      $this->db->query($query);
+
+      $this->reset_setting_aplikasi();
+    }
   }
 
   function migrasi_116_ke_117(){

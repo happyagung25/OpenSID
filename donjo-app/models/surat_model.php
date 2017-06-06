@@ -1013,14 +1013,14 @@
 		$handle = fopen($berkas_arsip,'w+');
 		fwrite($handle,$rtf);
 		fclose($handle);
-		if (config_item('libreoffice_path') AND config_item('libreoffice_path') != '') {
+		if (!empty($this->setting->libreoffice_path)) {
 			// Untuk konversi rtf ke pdf, libreoffice harus terinstall
 			if (strpos(strtoupper(php_uname('s')), 'WIN') !== false) {
 				// Windows O/S
 				$berkas_arsip_win = str_replace('/', "\\", $berkas_arsip);
 				$fcpath = str_replace('/', "\\", FCPATH);
 				$outdir = rtrim(str_replace('/',"\\",FCPATH.LOKASI_ARSIP), "/\\");
-				$cmd = 'cd '.config_item('libreoffice_path');
+				$cmd = 'cd '.$this->setting->libreoffice_path;
 				$cmd = $cmd." && soffice --headless --convert-to pdf:writer_pdf_Export --outdir ".$outdir." ".$fcpath.$berkas_arsip_win;
 			} else {
 				// Linux

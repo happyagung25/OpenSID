@@ -37,7 +37,7 @@
 <script type="text/javascript" src="<?php echo base_url()?>assets/js/donjoscript/donjo.ui.attribut.js"></script>
 <script type="text/javascript" src="<?php echo base_url()?>assets/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url()?>assets/js/validasi.js"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<?php echo config_item('google_key'); ?>"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<?php echo $this->setting->google_key; ?>"></script>
 <script type="text/javascript" src="<?php echo base_url()?>assets/js/jscolor/jscolor.js"></script>
 </head>
 <body>
@@ -86,8 +86,8 @@
 <div class="ui-layout-center" id="wrapper">
 
 
-<!-- NOTIFICATION
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<?php echo config_item('google_key'); ?>"></script>--><?php  if($_SESSION['success']==1): ?>
+<!-- NOTIFICATION-->
+<?php  if($_SESSION['success']==1): ?>
 <script type="text/javascript">
 $('document').ready(function(){
 notification('success','Data Berhasil Disimpan')();

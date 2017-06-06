@@ -18,7 +18,6 @@ class Setting_Model extends CI_Model
         $this->database_model->migrasi_db_cri();
       }
 
-
       $pr = $this->db->order_by('key')->get("setting_aplikasi")->result();
       foreach($pr as $p)
       {
@@ -33,11 +32,14 @@ class Setting_Model extends CI_Model
   }
 
   function update($data){
+    $_SESSION['success']=1;
+
     foreach ($data as $key => $value) {
       // Update setting yang diubah
       if ($this->setting->$key != $value) {
-        $this->db->where('key', $key)->update('setting_aplikasi', array('key'=>$key, 'value'=>$value));
+        $outp = $this->db->where('key', $key)->update('setting_aplikasi', array('key'=>$key, 'value'=>$value));
         $this->setting->$key = $value;
+        if(!$outp) $_SESSION['success']=-1;
       }
     }
   }

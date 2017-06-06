@@ -29,6 +29,7 @@ class Setting_Model extends CI_Model
       $pre = (object) $CI->config->config;
     }
     $CI->setting = (object) $pre;
+    $CI->list_setting = $pr; // Untuk tampilan daftar setting
   }
 
   function update($data){

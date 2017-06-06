@@ -14,10 +14,10 @@
                 <th width="150px">Setting</th>
                 <th>Nilai Setting</th>
             </tr>
-            <?php foreach($this->setting as $key => $value) : ?>
+            <?php foreach($this->list_setting as $setting) : ?>
                 <tr>
-                    <td><strong><?php echo $key?></strong></th>
-                    <td><input name="<?php echo $key?>" value="<?php echo $value?>"></td>
+                    <td><strong><?php echo $setting->key?></strong></th>
+                    <td><input name="<?php echo $setting->key?>" value="<?php echo $setting->value?>"></td>
                 </tr>
             <?php endforeach; ?>
 

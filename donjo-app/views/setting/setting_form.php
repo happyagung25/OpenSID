@@ -16,20 +16,22 @@
                 <th>Keterangan</th>
             </tr>
             <?php foreach($this->list_setting as $setting) : ?>
-                <tr>
-                    <td><strong><?php echo $setting->key?></strong></td>
-                    <td>
-                        <?php if($setting->jenis == 'boolean'): ?>
-                            <select name="<?php echo $setting->key?>" >
-                                <option value="1" <?php if($setting->value==1) :?>selected<?php endif?>>Ya</option>
-                                <option value="0" <?php if($setting->value==0) :?>selected<?php endif?>>Tidak</option>
-                            </select>
-                        <?php else : ?>
-                            <input name="<?php echo $setting->key?>" type="text" class="inputbox" size="50" value="<?php echo $setting->value?>">
-                        <?php endif; ?>
-                    </td>
-                    <td><?php echo $setting->keterangan?></td>
-                </tr>
+                <?php if($setting->kategori != 'development' OR ($this->config->item("environment") == 'development' )) : ?>
+                    <tr>
+                        <td><strong><?php echo $setting->key?></strong></td>
+                        <td>
+                            <?php if($setting->jenis == 'boolean'): ?>
+                                <select name="<?php echo $setting->key?>" >
+                                    <option value="1" <?php if($setting->value==1) :?>selected<?php endif?>>Ya</option>
+                                    <option value="0" <?php if($setting->value==0) :?>selected<?php endif?>>Tidak</option>
+                                </select>
+                            <?php else : ?>
+                                <input name="<?php echo $setting->key?>" type="text" class="inputbox" size="50" value="<?php echo $setting->value?>">
+                            <?php endif; ?>
+                        </td>
+                        <td><?php echo $setting->keterangan?></td>
+                    </tr>
+                <? endif; ?>
             <?php endforeach; ?>
 
         </table>

@@ -11,13 +11,15 @@
     <div class="ui-layout-center" id="maincontent" style="padding: 5px;">
         <table class="list">
             <tr>
-                <th width="150px">Setting</th>
-                <th>Nilai Setting</th>
+                <th width="160px">Setting</th>
+                <th width="320px">Nilai Setting</th>
+                <th>Keterangan</th>
             </tr>
             <?php foreach($this->list_setting as $setting) : ?>
                 <tr>
                     <td><strong><?php echo $setting->key?></strong></th>
-                    <td><input name="<?php echo $setting->key?>" value="<?php echo $setting->value?>"></td>
+                    <td><input name="<?php echo $setting->key?>" type="text" class="inputbox" size="50" value="<?php echo $setting->value?>"></td>
+                    <td><?php echo $setting->keterangan?></td>
                 </tr>
             <?php endforeach; ?>
 
